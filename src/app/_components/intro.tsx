@@ -5,7 +5,7 @@ export function Intro() {
         Kyle's Japan life
       </h1>
       <h4 className="text-center md:text-left text-lg mt-5 md:pl-8 text-red-500">
-        Blog of my life in Japand
+        Blog of my life in Japan
       </h4>
     </section>
   );
