@@ -7,7 +7,7 @@ type Props = {
 };
 
 const Alert = ({ preview }: Props) => {
-  return ;
+  return null;
 };
 
 export default Alert;
