@@ -1,3 +1,5 @@
+"use client";
+import { useState } from "react";
 import { Post } from "@/interfaces/post";
 import { PostPreview } from "./post-preview";
 
@@ -6,13 +8,20 @@ type Props = {
 };
 
 export function MoreStories({ posts }: Props) {
+  const [visibleCount, setVisibleCount] = useState(2); // show 3 initially
+
+  const showMore = () => {
+    setVisibleCount((prev) => prev + 1); // reveal 3 more each click
+  };
+
   return (
     <section>
       <h2 className="mb-8 text-5xl md:text-7xl font-bold tracking-tighter leading-tight text-red-500">
         More Stories
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-16 lg:gap-x-22 gap-y-20 md:gap-y-12 mb-32">
-        {posts.map((post) => (
+
+      <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-16 lg:gap-x-22 gap-y-20 md:gap-y-12 mb-12">
+        {posts.slice(0, visibleCount).map((post) => (
           <PostPreview
             key={post.slug}
             title={post.title}
@@ -23,6 +32,17 @@ export function MoreStories({ posts }: Props) {
           />
         ))}
       </div>
+
+      {visibleCount < posts.length && (
+        <div className="flex justify-center">
+          <button
+            onClick={showMore}
+            className="px-6 py-2 bg-red-500 text-white font-semibold rounded hover:bg-red-600 transition"
+          >
+            See more
+          </button>
+        </div>
+      )}
     </section>
   );
 }
