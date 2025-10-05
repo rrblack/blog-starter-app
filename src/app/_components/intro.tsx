@@ -11,7 +11,7 @@ export function Intro() {
         Blog of my life in Japan
       </h4>
       <Link 
-      href="/" 
+      href="/about/" 
       className="inline-block text-lg text-white font-bold hover:text-red-500">
         About me 
       </Link>

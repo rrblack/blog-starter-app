@@ -10,6 +10,9 @@ export function ArchiveNavigation() {
       >
         2019 Blog (First time in Japan)
       </a>
+      <div>
+        |
+      </div>
       <a
         href="https://kylesjapanlife.wordpress.com/"
         className="text-red-600 hover:text-red-700 font-semibold"

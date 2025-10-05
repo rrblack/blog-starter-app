@@ -11,7 +11,7 @@ export function MoreStories({ posts }: Props) {
   const [visibleCount, setVisibleCount] = useState(2); // show 3 initially
 
   const showMore = () => {
-    setVisibleCount((prev) => prev + 1); // reveal 3 more each click
+    setVisibleCount((prev) => prev + 3); // reveal 3 more each click
   };
 
   return (
@@ -37,7 +37,7 @@ export function MoreStories({ posts }: Props) {
         <div className="flex justify-center">
           <button
             onClick={showMore}
-            className="px-6 py-2 bg-red-500 text-white font-semibold rounded hover:bg-red-600 transition"
+            className="px-11 py-4 bg-red-500 text-white font-semibold rounded hover:bg-red-600 transition"
           >
             See more
           </button>
@@ -46,3 +46,4 @@ export function MoreStories({ posts }: Props) {
     </section>
   );
 }
+
