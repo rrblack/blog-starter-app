@@ -8,16 +8,21 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
+);
 
 export default function CommentSection() {
   const [name, setName] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("loading");
-    setMessage("");
 
     try {
       const response = await fetch("lib/supabase/server.ts", {
@@ -59,13 +64,11 @@ export default function CommentSection() {
           type="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          disabled={status === "loading"}
           required
         />
         <h1 className="text-xl"> Message: </h1>
         <textarea 
           className="grow mr-1 transition ease-out delay-75 focus-within:border-2 focus-within:border-red-600 h-40 w-full border border-red-600 rounded caret-red-700 outline-none px-4 disabled:border-slate-400 disabled:bg-slate-100 text-black"
-          type="message"
           onChange={(e) => setMessage(e.target.value)}
           value={message}
           required
@@ -77,16 +80,9 @@ export default function CommentSection() {
         >
           {status === "loading" ? "..." : "Submit"}
         </button>
+        {status === "error" && <p className="text-red-500">Failed to send comment. Please try again.</p>}
+        {status === "success" && <p className="text-green-500">Comment submitted successfully!</p>}
       </div>
-      {message && (
-        <p
-          className={`mt-2 text-sm text-center ${
-            status === "error" ? "text-red-500" : "text-green-500"
-          }`}
-        >
-          {message}
-        </p>
-      )}
     </form>
   );
 }
