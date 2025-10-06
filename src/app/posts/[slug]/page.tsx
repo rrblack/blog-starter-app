@@ -7,6 +7,7 @@ import Container from "@/app/_components/container";
 import Header from "@/app/_components/header";
 import { PostBody } from "@/app/_components/post-body";
 import { PostHeader } from "@/app/_components/post-header";
+import CommentSection from "@/app/comment-section/page";
 
 export default async function Post(props: Params) {
   const params = await props.params;
@@ -33,6 +34,7 @@ export default async function Post(props: Params) {
           <PostBody content={content} />
         </article>
       </Container>
+      <CommentSection />
     </main>
   );
 }
