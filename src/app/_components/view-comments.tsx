@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
 const supabase = createClient();
-
 
 type Comment = {
   id: string;
@@ -16,17 +16,20 @@ type Comment = {
 
 export default function CommentViewer() {
   const [comments, setComments] = useState<Comment[]>([]);
+  const params = useParams();
+  const slug_id = params.slug as string;
 
   useEffect(() => {
     fetchComments();
   }, []);
+  
   
   async function fetchComments() {
     const {data, error} = await supabase
       .from('comment_section')
       .select('*')
       .eq('published', true)
-      .eq('slug_id', window.location.pathname.split("/").pop())
+      .eq('slug_id', slug_id)
       .order("created_at", { ascending: false });
 
     if (error) {
@@ -38,7 +41,13 @@ export default function CommentViewer() {
 
   return (
     <div> <h1 className="text-center text-bold text-5xl"> 
-    {comments.length > 0 ? `${comments.length} comments` : "Be the first to comment"} </h1>  
+    {comments.length === 0 
+    ? "Be the first to comment"
+     : comments.length === 1
+     ? "1 comment"
+     : comments.length > 1  
+     ? `${comments.length} comments`: null} 
+      </h1>  
 
     {comments.map((comment) => (
       <div key={comment.id} className="flex-center max-w-2xl mx-auto my-10 p-5 border rounded"> 
@@ -52,31 +61,3 @@ export default function CommentViewer() {
     </div>
   );
 }
-
-
-// export default function CommentViewer({ slug }: { slug: string }) {
-//   const [comments, setComments] = useState<Comment[]>([]);
-//   const [loading, setLoading] = useState(true);
-
-//   const supabase = createClient();
-
-//   useEffect(() => {
-//     const fetchComments = async () => {
-//       const { data, error } = await supabase
-//         .from("comments")
-//         .select("id, name, message, created_at")
-//         .eq("slug_id", slug)
-//         .eq("published", true)
-//         .order("created_at", { ascending: false });
-
-//       if (error) {
-//         console.error("Error fetching comments:", error.message);
-//       } else {
-//         setComments(data || []);
-//       }
-
-//       setLoading(false);
-//     };
-
-//     fetchComments();
-//   }, [slug, supabase]);

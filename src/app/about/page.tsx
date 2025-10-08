@@ -1,11 +1,14 @@
 import Header from "@/app/_components/header";
 import Image from "next/image";
+import Container from "@/app/_components/container";
 
 export default function AboutPage() {
   return (
     <main>
+      <Container >
         <Header />
-      <h1 className="md:-mt-20 text-center text-4xl md:text-8xl"> Hi I'm Kyle </h1>
+        <div className="md:mt-36 mt-2"> 
+          <h1 className="md:-mt-20 text-center text-4xl md:text-8xl mb-12"> Hi I'm Kyle </h1>
         <Image
         src="/assets/blog/authors/joe.jpeg"
         alt="Picture of the author"
@@ -19,6 +22,8 @@ export default function AboutPage() {
         <br/> After my year in Kōchi, I moved to Tokyo to pursue a career in IT. I'm currently working in the tech industry, where I apply skills I taught myself through self-study. The same goes for Japanese—through consistent study and immersion, I earned the JLPT N1, the highest level of Japanese proficiency. <br/> 
 
         <br/> This blog is where I share my journey, experiences, and thoughts on life in Japan, language learning, and working in tech. Thanks for stopping by!<br/> </p>
+        </div> 
+        </Container>
     </main>
   );
 } 
