@@ -3,7 +3,7 @@ import { HeroPost } from "@/app/_components/hero-post";
 import { Intro } from "@/app/_components/intro";
 import { MoreStories } from "@/app/_components/more-stories";
 import { getAllPosts } from "@/lib/api";
-import {ArchiveNavigation} from "@/app/_components/archive-navigation";
+import { ArchiveNavigation } from "@/app/_components/archive-navigation";
 
 
 export default function Index() {
@@ -27,6 +27,7 @@ export default function Index() {
           excerpt={heroPost.excerpt}
         />
         {morePosts.length > 0 && <MoreStories posts={morePosts} />}
+        <div className="mt-16"> </div>
       </Container>
     </main>
   );
