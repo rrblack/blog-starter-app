@@ -3,7 +3,7 @@ export function ArchiveNavigation() {
     <div className="md:mb-16 -mt-24 md:-mt-8"> 
     <h1 className ="text-center mb-8 text-white font-bold text-4xl"> Looking for past blogs? 
       </h1>
-    <nav className="flex justify-center space-x-4 mb-8 text-xl">
+    <nav className="flex justify-center space-x-4 mb-8 text-wrap md:text-2xl border-x-15 rounded-full shadow-md md:py-5 shadow-red-700">
       <a
         href="http://myjapantrip2019.wordpress.com/#"
         className="text-red-600 hover:text-red-700 font-semibold"

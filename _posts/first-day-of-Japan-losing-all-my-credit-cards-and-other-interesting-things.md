@@ -1,11 +1,11 @@
 ---
 title: "First day of Japan, losing all my credit cards and other interesting things."
 excerpt: "Well the time has finally come. I am actually in Japan and it still doesn’t feel real. Walking down Akihabara yesterday I kept saying to myself “this has to be a dream I’ll wake up from any minute”. Today is the first day of our orientation that be will starting in about 3 hours from now. I figured I’d take some spare time to write out some of my first impressions and thoughts from yesterday before I forget."
-coverImage: "/assets/blog/dynamic-routing/cover.jpg"
+coverImage: "/assets/blog/first-day-in-japan/PXL_20251004_120351704.jpg"
 date: "2025-10-02T05:35:07.322Z"
 author:
   name: Kyle Porter
-  picture: "/assets/blog/authors/jj.jpeg"
+  picture: "/assets/blog/authors/kyle.jpg"
 ogImage:
   url: "/assets/blog/dynamic-routing/cover.jpg"
 ---

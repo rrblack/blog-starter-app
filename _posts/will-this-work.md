@@ -5,7 +5,7 @@ coverImage: "/assets/blog/dynamic-routing/cover.jpg"
 date: "2025-10-02T05:35:07.322Z"
 author:
   name: Kyle Porter
-  picture: "/assets/blog/authors/jj.jpeg"
+  picture: "/assets/blog/authors/kyle.jpg"
 ogImage:
   url: "/assets/blog/dynamic-routing/cover.jpg"
 ---

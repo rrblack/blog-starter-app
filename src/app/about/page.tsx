@@ -10,11 +10,11 @@ export default function AboutPage() {
         <div className="md:mt-36 mt-2"> 
           <h1 className="md:-mt-20 text-center text-4xl md:text-8xl mb-12"> Hi I'm Kyle </h1>
         <Image
-        src="/assets/blog/authors/joe.jpeg"
+        src="/assets/blog/authors/Img_2025_02_16_00_19_00.jpeg"
         alt="Picture of the author"
-        width={100}
-        height={100}
-        className="rounded-full mx-auto mt-10">
+        width={300}
+        height={200}
+        className="rounded-l-full mx-auto mt-10">
         </Image>
       <p className="flex items-center md:text-center md:text-xl md:text-wrap mt-10 md:mt-10 mx-5 md:mx-60 mb-10 md:mb-15"> 
         Thanks for stopping in on my blog! Originally from Chattanooga Tennessee, I first came to Japan in July 2022 through the JET Programme, spending an unforgettable year in the beautiful town of Muroto, Kōchi Prefecture. That time deepened my love for Japan’s culture, language, and people. <br/>
