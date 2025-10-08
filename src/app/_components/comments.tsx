@@ -10,6 +10,7 @@ export default function CommentSection() {
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const slug_id = window.location.pathname.split("/").pop(); // Get the slug from the URL
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Submitting comment:", { name, message, slug_id});
@@ -31,6 +32,7 @@ export default function CommentSection() {
       // Clear form on success
       setName("");
       setMessage("");
+      window.location.reload();
     } catch (error) {
       console.error("Error submitting comment:", error);
       setStatus("error");

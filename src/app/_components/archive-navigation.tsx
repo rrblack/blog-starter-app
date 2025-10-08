@@ -1,6 +1,6 @@
 export function ArchiveNavigation() {
   return (
-    <div className="mb-16 -mt-8"> 
+    <div className="md:mb-16 -mt-24 md:-mt-8"> 
     <h1 className ="text-center mb-8 text-white font-bold text-4xl"> Looking for past blogs? 
       </h1>
     <nav className="flex justify-center space-x-4 mb-8 text-xl">

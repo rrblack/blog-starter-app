@@ -16,11 +16,11 @@ export function MoreStories({ posts }: Props) {
 
   return (
     <section>
-      <h2 className="mb-8 text-5xl md:text-7xl font-bold tracking-tighter leading-tight text-red-500">
+      <h2 className="mb-8 text-5xl -mt-8 md:text-7xl font-bold tracking-tighter leading-tight text-red-500">
         More Stories
       </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-16 lg:gap-x-22 gap-y-20 md:gap-y-12 mb-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-16 lg:gap-x-22 gap-y-12 md:gap-y-12 mb-12">
         {posts.slice(0, visibleCount).map((post) => (
           <PostPreview
             key={post.slug}

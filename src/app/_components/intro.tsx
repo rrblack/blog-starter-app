@@ -7,7 +7,7 @@ export function Intro() {
         Kyle's Japan life
       </h1>
       <div className="flex flex-col md:items-end">
-      <h4 className="text-center md:text-left text-lg mt-5 md:pl-8 text-red-500">
+      <h4 className="text-center md:text-right text-lg mt-5 md:pl-8 text-red-500">
         Blog of my life in Japan
       </h4>
       <Link 
