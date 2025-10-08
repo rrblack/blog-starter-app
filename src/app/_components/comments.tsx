@@ -2,14 +2,16 @@
 
 import { useState, FormEvent } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { useParams } from "next/navigation"
 
-const supabase = createClient();
 
 export default function CommentSection() {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const slug_id = window.location.pathname.split("/").pop(); // Get the slug from the URL
+  const supabase = createClient();
+  const params = useParams();
+  const slug_id = params.slug as string;
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -33,6 +35,7 @@ export default function CommentSection() {
       setName("");
       setMessage("");
       window.location.reload();
+      
     } catch (error) {
       console.error("Error submitting comment:", error);
       setStatus("error");
@@ -48,7 +51,7 @@ export default function CommentSection() {
       <h2 className="text-center text-2xl text-red-500 font-semibold">
         Leave a comment
       </h2>
-      <div className=" ">
+      <div>
         <h1 className="text-xl"> Name: </h1>
         <input
           className="grow mr-1 transition ease-out delay-75 focus-within:border-2 focus-within:border-red-600 items-center h-14 pr-0.5 border border-red-600 rounded caret-red-700 outline-none px-4 disabled:border-slate-400 disabled:bg-slate-100 text-black"
