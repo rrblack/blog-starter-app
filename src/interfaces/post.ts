@@ -1,4 +1,5 @@
 import { type Author } from "./author";
+import type { ReactNode } from "react";
 
 export type Post = {
   slug: string;
@@ -10,6 +11,6 @@ export type Post = {
   ogImage: {
     url: string;
   };
-  content: string;
+  content: ReactNode;
   preview?: boolean;
 };

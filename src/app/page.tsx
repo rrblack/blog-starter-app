@@ -6,8 +6,8 @@ import { getAllPosts } from "@/lib/api";
 import { ArchiveNavigation } from "@/app/_components/archive-navigation";
 
 
-export default function Index() {
-  const allPosts = getAllPosts();
+export default async function Index() {
+  const allPosts = await getAllPosts();
 
   const heroPost = allPosts[0];
 

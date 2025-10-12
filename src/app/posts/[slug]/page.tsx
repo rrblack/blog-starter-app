@@ -1,24 +1,19 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getAllPosts, getPostBySlug } from "@/lib/api";
-import markdownToHtml from "@/lib/markdownToHtml";
 import Alert from "@/app/_components/alert";
 import Container from "@/app/_components/container";
 import Header from "@/app/_components/header";
-import { PostBody } from "@/app/_components/post-body";
 import { PostHeader } from "@/app/_components/post-header";
 import CommentSection from "@/app/_components/comments";
 import CommentViewer from "@/app/_components/view-comments";
 
-export default async function Post(props: Params) {
-  const params = await props.params;
-  const post = getPostBySlug(params.slug);
+export default async function Post({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
 
-  if (!post) {
-    return notFound();
-  }
+  const post = await getPostBySlug(slug);
 
-  const content = await markdownToHtml(post.content || "");
+  if (!post) return notFound();
 
   return (
     <main>
@@ -32,30 +27,31 @@ export default async function Post(props: Params) {
             date={post.date}
             author={post.author}
           />
-          <PostBody content={content} />
+          <div className="flex justify-center">
+            <div className="prose prose-lg prose-invert max-w-3xl w-full px-4">
+              {post.content}
+            </div>
+          </div>
         </article>
       </Container>
-      <CommentViewer/>
-      <CommentSection/>
+      <CommentViewer />
+      <CommentSection />
     </main>
   );
 }
 
-type Params = {
-  params: Promise<{
-    slug: string;
-  }>;
-};
 
-export async function generateMetadata(props: Params): Promise<Metadata> {
-  const params = await props.params;
-  const post = getPostBySlug(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+
+  const post = await getPostBySlug(slug);
+
 
   if (!post) {
     return notFound();
   }
 
-  const title = `${post.title} | Next.js Blog Example with `;
+  const title = `${post.title} | Next.js Blog Example`;
 
   return {
     title,
@@ -67,7 +63,7 @@ export async function generateMetadata(props: Params): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  const posts = getAllPosts();
+  const posts = await getAllPosts();
 
   return posts.map((post) => ({
     slug: post.slug,
