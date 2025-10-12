@@ -7,7 +7,7 @@ export function Footer() {
   <div>
   <main className="container mx-auto px-4 py-8 flex-grow"></main>
   <footer className="bg-gray-800 text-white text-center py-4">
-    <p>&copy; {new Date().getFullYear()} Kyle's Japan life. All rights reserved.</p>
+    <p>&copy; {new Date().getFullYear()} Kyle's Japan Life. All rights reserved.</p>
   </footer>
   </div>
 </div>
