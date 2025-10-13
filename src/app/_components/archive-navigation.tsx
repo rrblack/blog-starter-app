@@ -8,7 +8,7 @@ export function ArchiveNavigation() {
         href="http://myjapantrip2019.wordpress.com/#"
         className="text-red-600 hover:text-red-700 font-semibold"
       >
-        2019 Blog (First time in Japan)
+        2019 Blog (<span className="text-white">First time in Japan</span>)
       </a>
       <div className="hidden md:block">
       </div>
@@ -17,7 +17,7 @@ export function ArchiveNavigation() {
         href="https://kylesjapanlife.wordpress.com/"
         className="text-red-600 hover:text-red-700 font-semibold"
       >
-        2022 Blog (Covers my life in Japan from July 2022 - January 2024)
+        2022 Blog (<span className="text-white">Covers my life in Japan from July 2022 - January 2024</span>)
       </a>
       </div>
         </nav>
