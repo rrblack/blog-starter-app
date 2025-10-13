@@ -28,7 +28,7 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
             author={post.author}
           />
           <div className="flex justify-center">
-            <div className="prose prose-lg prose-invert max-w-3xl w-full px-4">
+            <div className="prose prose-lg prose-invert max-w-3xl w-full px-4 text-white">
               {post.content}
             </div>
           </div>

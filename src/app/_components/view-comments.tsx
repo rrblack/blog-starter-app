@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { set } from "date-fns";
+import Spinner from "./comment_spinner";
 
 const supabase = createClient();
 
@@ -18,6 +20,7 @@ export default function CommentViewer() {
   const [comments, setComments] = useState<Comment[]>([]);
   const params = useParams();
   const slug_id = params.slug as string;
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   useEffect(() => {
     fetchComments();
@@ -25,6 +28,7 @@ export default function CommentViewer() {
   
   
   async function fetchComments() {
+    setStatus("loading");
     const {data, error} = await supabase
       .from('comment_section')
       .select('*')
@@ -34,23 +38,29 @@ export default function CommentViewer() {
 
     if (error) {
       console.error("Error fetching comments:", error);
+      setStatus("error");
     } else{
       setComments(data);
+      setStatus("success");
     }
   }
 
   return (
-    <div> <h1 className="text-center text-bold text-5xl"> 
-    {comments.length === 0 
+    <div> 
+    <h1 className="text-center font-bold text-5xl">
+      {status === "loading" && <Spinner />}
+      {status === "error" && "Error loading comments"}
+      {status === "success" &&
+    comments.length === 0 
     ? "Be the first to comment"
      : comments.length === 1
      ? "1 comment"
      : comments.length > 1  
      ? `${comments.length} comments`: null} 
       </h1>  
-
-    {comments.map((comment) => (
-      <div key={comment.id} className="flex-center max-w-2xl mx-auto my-10 p-5 border rounded"> 
+    {status === "success" &&  
+      comments.map((comment) => (
+      <div key={comment.id} className="max-w-2xl mx-auto my-10 p-5 border rounded"> 
         <h1 className="text-2xl text-red-600 font-semibold"> {comment.name} </h1>
         <h2 className="text-sm text-gray-600 mb-1">
              {new Date(comment.created_at).toLocaleString()}

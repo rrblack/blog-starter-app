@@ -1,4 +1,3 @@
-import { type Author } from "@/interfaces/author";
 import Link from "next/link";
 import CoverImage from "./cover-image";
 import DateFormatter from "./date-formatter";
@@ -24,14 +23,16 @@ export function PostPreview({
         <CoverImage slug={slug} title={title} src={coverImage} />
       </div>
       <h3 className="text-3xl mb-3 leading-snug">
-        <Link href={`/posts/${slug}`} className="hover:text-red-500 hover:underline">
+        <Link href={`/posts/${slug}`} className="text-red-500 hover:text-red-300 hover:underline">
           {title}
         </Link>
       </h3>
       <div className="text-lg mb-4">
         <DateFormatter dateString={date} />
       </div>
-      <p className="text-lg leading-relaxed mb-4">{excerpt}</p>
+      <div> <Link href={`/posts/${slug}`} className="text-lg leading-relaxed mb-4">
+      <p className="text-lg leading-relaxed mb-4">{excerpt}</p></Link>
+      </div>
     </div>
   );
 }
