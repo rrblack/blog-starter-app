@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://kylesjapan.life
+
+# Sitemaps
+Sitemap: https://kylesjapan.life/sitemap.xml
