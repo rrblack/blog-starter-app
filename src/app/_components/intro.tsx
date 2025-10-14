@@ -18,7 +18,7 @@ export function Intro() {
           </h4>
           <Link
             href="/about/"
-            className="text-xl text-white font-bold hover:text-red-500 mt-2 md:mt-3 hover:scale-110 shadow-red-500/70"
+            className="text-xl text-white font-bold hover:text-red-500 mt-2 md:mt-3 hover:scale-110 transform transition-transform shadow-red-500/70"
           >
             About me
           </Link>

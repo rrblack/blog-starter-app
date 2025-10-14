@@ -6,16 +6,16 @@ export function ArchiveNavigation() {
     <nav className="flex justify-center flex-wrap space-x-11 md:space-x-8 mb-8 text-wrap md:text-2xl rounded-full shadow-md py-5 md:py-5 border border-red-400 shadow-red-700/50 hover:shadow-red-400/90 transition-shadow-900 ">
       <a
         href="http://myjapantrip2019.wordpress.com/#"
-        className="text-red-600 hover:text-red-700 font-semibold hover:scale-105"
+        className="text-red-600 hover:text-red-700 font-semibold transform transition-transform hover:scale-105"
       >
         2019 Blog (<span className="text-white">First time in Japan</span>)
       </a>
       <div className="hidden md:block">
       </div>
-      <div className="mt-5 md:mt-0 hover:scale-105">
+      <div className="mt-5 md:mt-0 hover:scale-105 transform transition-transform">
       <a 
         href="https://kylesjapanlife.wordpress.com/"
-        className="text-red-600 hover:text-red-700 font-semibold"
+        className="text-red-600 hover:text-red-700 font-semibold "
       >
         2022 Blog (<span className="text-white">Covers my life in Japan from July 2022 - January 2024</span>)
       </a>

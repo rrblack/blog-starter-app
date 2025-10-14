@@ -8,7 +8,7 @@ export default function AboutPage() {
       <Container >
         <Header />
         <div className="md:mt-36 mt-2"> 
-          <h1 className="md:-mt-20 text-center text-4xl md:text-8xl mb-12"> Hi I'm Kyle </h1>
+          <h1 className="md:-mt-20 text-center text-4xl md:text-8xl mb-12"> Hi, I'm Kyle </h1>
         <div className="md:mt-20"> 
         <Image
         src="/assets/blog/authors/Img_2025_02_16_00_19_00.jpeg"
