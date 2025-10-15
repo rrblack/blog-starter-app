@@ -51,7 +51,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     return notFound();
   }
 
-  const title = `${post.title} | Next.js Blog Example`;
+  const title = `${post.title} | Kyle's Japan Life`;
 
   return {
     title,
