@@ -1,5 +1,8 @@
 import createMDX from '@next/mdx'
 import remarkGfm from 'remark-gfm'
+import createNextIntlPlugin from 'next-intl/plugin';
+
+const withNextIntl = createNextIntlPlugin();
 
 const withMDX = createMDX({
   // MDX options must be nested under `options`
@@ -19,4 +22,6 @@ const nextConfig = {
   },
 }
 
-export default withMDX(nextConfig)
+
+export default withNextIntl(withMDX(nextConfig));
+

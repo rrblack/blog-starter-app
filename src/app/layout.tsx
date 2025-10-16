@@ -4,11 +4,12 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import cn from "classnames";
 import "./globals.css";
+import {NextIntlClientProvider} from "next-intl";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: `Kyle's Japan Life`,
+  title: `Kyle's Japan life`,
   description: `Blog of my life in Japan`,
   openGraph: {
     images: [HOME_OG_IMAGE_URL],
@@ -21,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="min-h-screen bg-black text-white">
+    <html lang="en">
       <head>
         <link
           rel="apple-touch-icon"
@@ -58,7 +59,7 @@ export default function RootLayout({
       <body
         className={cn(inter.className, "dark:bg-slate-900 dark:text-slate-400")}
       >
-        <div className="min-h-screen">{children}</div>
+        <div className="min-h-screen"> <NextIntlClientProvider locale="en">{children} </NextIntlClientProvider></div>
         <Footer />
       </body>
     </html>
