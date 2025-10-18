@@ -1,4 +1,3 @@
-import cn from "classnames";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -10,16 +9,18 @@ type Props = {
 
 const CoverImage = ({ title, src, slug }: Props) => {
   const image = (
-    <Image
-      src={src}
-      alt={`Cover Image for ${title}`}
-      className={cn("shadow-sm w-full h-auto object-cover aspect-video rounded-lg", {
-        " w-full h-auto object-cover aspect-video rounded-lg": slug,
-      })}
-      width={1920}
-      height={1080}
-    />
+    <div className="relative aspect-video w-full rounded-lg overflow-hidden shadow-sm">
+      <Image
+        src={src}
+        alt={`Cover Image for ${title}`}
+        fill
+        className="object-cover"
+        sizes="100vw"
+        priority
+      />
+    </div>
   );
+
   return (
     <div className="sm:mx-0">
       {slug ? (
