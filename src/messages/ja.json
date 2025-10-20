@@ -1,0 +1,20 @@
+{
+  "Intro": {
+    "title": "カイルの日本生活",
+    "subtitle": "日本での生活ブログ",
+    "about_me": "僕について"
+  },
+  "Navigation":{
+    "2019 blog": "2019年のブログ（初来日）",
+    "2022 blog": "日本の2回目（2022年から2024年の1月まで）"
+  },
+  "Name":{
+    "Kyle Porter": "ポーター　カイル"
+  },
+  "Newsletter":{
+  "subscribe": "購読する",
+  "stay_updated": "最新の日本ブログをチェックしよう！",
+  "type_email":"メールアドレスを入力…"
+  },
+  "more_stories":"もっと見る"
+}
