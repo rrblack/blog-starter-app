@@ -1,6 +1,6 @@
 import createMDX from "@next/mdx";
 import remarkGfm from "remark-gfm";
-import createNextIntlPlugin from "next-intl/plugin.js";
+import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin();
 const withMDX = createMDX({
@@ -12,10 +12,6 @@ const withMDX = createMDX({
 });
 
 const nextConfig = {
-  i18n: {
-    locales: ["en", "ja"],
-    defaultLocale: "en",
-  },
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   experimental: {
     mdxRs: false,

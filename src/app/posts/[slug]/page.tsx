@@ -8,10 +8,11 @@ import { PostHeader } from "@/app/_components/post-header";
 import CommentSection from "@/app/_components/comments";
 import CommentViewer from "@/app/_components/view-comments";
 
+
 export default async function Post({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
 
-  const post = await getPostBySlug(slug);
+  const post = await getPostBySlug(slug, "en");
 
   if (!post) return notFound();
 
@@ -44,14 +45,14 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
 
-  const post = await getPostBySlug(slug);
+  const post = await getPostBySlug(slug, "en");
 
 
   if (!post) {
     return notFound();
   }
 
-  const title = `${post.title} | Next.js Blog Example`;
+  const title = `${post.title} | Kyle's Japan Life`;
 
   return {
     title,
@@ -63,7 +64,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 export async function generateStaticParams() {
-  const posts = await getAllPosts();
+  const posts = await getAllPosts("en");
 
   return posts.map((post) => ({
     slug: post.slug,
