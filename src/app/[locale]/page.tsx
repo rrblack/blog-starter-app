@@ -35,6 +35,7 @@ export default async function Index({ params }: { params: { locale: string } }) 
           author={heroPost.author}
           slug={heroPost.slug}
           excerpt={heroPost.excerpt}
+          locale={heroPost.locale}
         />
         {morePosts.length > 0 && <MoreStories posts={morePosts} />}
         <div className="mt-16" />

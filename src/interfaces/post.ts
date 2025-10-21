@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 
 export type Post = {
   slug: string;
+  locale: string;
   title: string;
   date: string;
   coverImage: string;

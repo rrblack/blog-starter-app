@@ -1,12 +1,24 @@
-import { parseISO, format } from "date-fns";
-
 type Props = {
   dateString: string;
+  locale?: string;
 };
 
-const DateFormatter = ({ dateString }: Props) => {
-  const date = parseISO(dateString);
-  return <time dateTime={dateString}>{format(date, "LLLL	d, yyyy")}</time>;
-};
+export default function DateFormatter({ dateString, locale = "en" }: Props) {
+  const date = new Date(dateString);
+  
+  if (isNaN(date.getTime())) {
+    // fallback if invalid
+    return <time>{dateString}</time>;
+  }
 
-export default DateFormatter;
+  const formatted = new Intl.DateTimeFormat(
+    locale === "ja" ? "ja-JP" : "en-US",
+    {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }
+  ).format(date);
+
+  return <time dateTime={dateString}>{formatted}</time>;
+}

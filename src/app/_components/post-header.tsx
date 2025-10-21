@@ -10,9 +10,10 @@ type Props = {
   coverImage: string;
   date: string;
   author: Author;
+  locale: string;
 };
 
-export function PostHeader({ title, coverImage, date, author }: Props) {
+export function PostHeader({ title, coverImage, date, author, locale }: Props) {
   return (
     <>
       <PostTitle>{title}</PostTitle>
@@ -26,7 +27,7 @@ export function PostHeader({ title, coverImage, date, author }: Props) {
         </Link>
       </div>
         <div className="mb-6 text-lg">
-          <DateFormatter dateString={date} />
+          <DateFormatter dateString={date} locale={locale}/>
         </div>
       </div>
     </>

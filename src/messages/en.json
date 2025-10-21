@@ -1,8 +1,33 @@
 {
   "Intro": {
     "title": "Kyle's Japan Life",
-    "subtitle": "Blog of my life in Japan"
+    "subtitle": "Blog of my life in Japan",
+    "about_me": "About me"
   },
-  "subscribe": "Subscribe",
-  "stay_updated": "Stay up to date on my latest Japan blogs!"
+  "Navigation":{
+    "2019_blog": "2019 Blog (First time in Japan)",
+    "2022_blog": "2022 Blog (Covers my life in Japan from July 2022 - January 2024)"
+  },
+  "Name":{
+    "Kyle_Porter": "Kyle Porter"
+  },
+  "Newsletter":{
+    "subscribe": "Subscribe",
+    "stay_updated": "Stay up to date on my latest Japan blogs!",
+    "type_email":"Type your email…",
+    "subscribed":"Success! Thanks for subscribing.",
+    "error":"An unexpected error occurred. Please try again."
+  },
+  "Comments":{
+    "first":"Be the first to comment",
+    "multiple_comments":"comments",
+    "leave_comment":"Leave a comment",
+    "name":"Name",
+    "comment_message":"Message",
+    "submit":"Submit",
+    "comment_error":"Failed to send comment. Please try again.",
+    "comment_successful":"Comment successfully submitted!",
+    "comment_will_display_soon":"Your comment will appear shortly."
+  },
+  "more_stories":"More Stories"
 }

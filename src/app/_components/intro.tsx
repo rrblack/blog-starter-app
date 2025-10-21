@@ -1,11 +1,16 @@
 import Link from "next/link";
+import { useTranslations } from "next-intl";
+
 
 export function Intro() {
+  const t = useTranslations("IntroPage")
   return (
     <div>
       <section className="flex-col md:flex-row flex items-center md:justify-between mt-16 mb-16 md:mb-12">
         {/* Title */}
         <div>
+          <h1>{t("title")}</h1>
+
           <h1 className="text-5xl md:text-8xl font-bold tracking-tighter leading-tight md:pr-8 text-red-500">
             Kyle&apos;s Japan Life
           </h1>

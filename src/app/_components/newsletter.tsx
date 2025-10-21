@@ -1,11 +1,13 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import { useTranslations } from "next-intl";
 
 export function SubscribeForm() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
+  const t = useTranslations('Newsletter');
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -44,13 +46,13 @@ export function SubscribeForm() {
       className="rounded px-8 pt-6 pb-8 mb-4 max-w-2xl center mx-auto"
     >
       <h2 className="text-center text-2xl text-red-500 font-semibold">
-        Stay up to date on my latest Japan blogs!
+        {t('stay_updated')}
       </h2>
       <div className="mt-4 flex">
         <input
           className="grow mr-1 transition ease-out delay-75 focus-within:border-2 focus-within:border-red-600 items-center h-14 pr-0.5 border border-red-600 rounded caret-red-700 outline-none px-4 disabled:border-slate-400 disabled:bg-slate-100 text-black"
           type="email"
-          placeholder="Type your email..."
+          placeholder= {t('type_email')}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           disabled={status === "loading"}
@@ -61,7 +63,7 @@ export function SubscribeForm() {
           type="submit"
           disabled={status === "loading"}
         >
-          {status === "loading" ? "..." : "Subscribe"}
+          {status === "loading" ? "..." : t('subscribe')}
         </button>
       </div>
       {message && (

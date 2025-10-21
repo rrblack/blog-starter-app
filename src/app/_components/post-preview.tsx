@@ -8,6 +8,7 @@ type Props = {
   date: string;
   excerpt: string;
   slug: string;
+  locale: string;
 };
 
 export function PostPreview({
@@ -16,6 +17,7 @@ export function PostPreview({
   date,
   excerpt,
   slug,
+  locale,
 }: Props) {
   return (
     <div>
@@ -28,7 +30,7 @@ export function PostPreview({
         </Link>
       </h3>
       <div className="text-lg mb-4">
-        <DateFormatter dateString={date} />
+        <DateFormatter dateString={date} locale={locale} />
       </div>
       <div> <Link href={`/posts/${slug}`} className="text-lg leading-relaxed mb-4">
       <p className="text-lg leading-relaxed mb-4">{excerpt}</p></Link>

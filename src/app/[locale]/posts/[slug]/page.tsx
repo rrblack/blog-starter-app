@@ -8,7 +8,11 @@ import { PostHeader } from "@/app/_components/post-header";
 import CommentSection from "@/app/_components/comments";
 import CommentViewer from "@/app/_components/view-comments";
 
-export default async function Post({ params }: { params: { locale: string; slug: string } }) {
+export default async function Post({
+  params,
+}: {
+  params: { locale: string; slug: string };
+}) {
   const { locale, slug } = await params;
   const post = await getPostBySlug(slug, locale);
 
@@ -25,6 +29,7 @@ export default async function Post({ params }: { params: { locale: string; slug:
             coverImage={post.coverImage}
             date={post.date}
             author={post.author}
+            locale={post.locale}
           />
           <div className="flex justify-center">
             <div className="prose prose-lg prose-invert max-w-3xl w-full px-4 text-white">
@@ -39,8 +44,12 @@ export default async function Post({ params }: { params: { locale: string; slug:
   );
 }
 
-export async function generateMetadata({ params }: { params: { locale: string; slug: string } }): Promise<Metadata> {
-  const { locale, slug } = params;
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: string; slug: string };
+}): Promise<Metadata> {
+  const { locale, slug } = await params;
   const post = await getPostBySlug(slug, locale);
 
   if (!post) return notFound();
@@ -54,10 +63,17 @@ export async function generateMetadata({ params }: { params: { locale: string; s
   };
 }
 
+// 👇 Generate static params for *all* locales
 export async function generateStaticParams() {
-  const posts = await getAllPosts("ja");
-  return posts.map((post) => ({
-    locale: "ja",
-    slug: post.slug,
-  }));
+  const locales = ["en", "ja"]; // add more if needed
+  const allPostsByLocale = await Promise.all(
+    locales.map((locale) => getAllPosts(locale))
+  );
+
+  return allPostsByLocale.flatMap((posts, i) =>
+    posts.map((post) => ({
+      locale: locales[i],
+      slug: post.slug,
+    }))
+  );
 }

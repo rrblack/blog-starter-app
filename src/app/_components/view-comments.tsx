@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { set } from "date-fns";
 import Spinner from "./comment_spinner";
+import { useTranslations } from "next-intl";
 
 const supabase = createClient();
 
@@ -21,7 +22,7 @@ export default function CommentViewer() {
   const params = useParams();
   const slug_id = params.slug as string;
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-
+  const t = useTranslations("Comments")
   useEffect(() => {
     fetchComments();
   }, []);
@@ -49,14 +50,14 @@ export default function CommentViewer() {
     <div> 
     <h1 className="text-center font-bold text-5xl">
       {status === "loading" && <Spinner />}
-      {status === "error" && "Error loading comments"}
+      {status === "error" && t("comment_loading_comments")}
       {status === "success" &&
     comments.length === 0 
-    ? "Be the first to comment"
+    ? t("first")
      : comments.length === 1
-     ? "1 comment"
+     ? `1 ${t("multiple_comments")}`
      : comments.length > 1  
-     ? `${comments.length} comments`: null} 
+     ? `${comments.length} ${t("multiple_comments")}`: null} 
       </h1>  
     {status === "success" &&  
       comments.map((comment) => (

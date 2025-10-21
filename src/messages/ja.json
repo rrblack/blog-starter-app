@@ -5,16 +5,30 @@
     "about_me": "僕について"
   },
   "Navigation":{
-    "2019 blog": "2019年のブログ（初来日）",
-    "2022 blog": "日本の2回目（2022年から2024年の1月まで）"
+    "2019_blog": "2019年のブログ（初来日）",
+    "2022_blog": "日本の2回目（2022年から2024年の1月まで）"
   },
   "Name":{
-    "Kyle Porter": "ポーター　カイル"
+    "Kyle_Porter": "ポーター　カイル"
   },
   "Newsletter":{
-  "subscribe": "購読する",
-  "stay_updated": "最新の日本ブログをチェックしよう！",
-  "type_email":"メールアドレスを入力…"
+    "subscribe": "購読する",
+    "stay_updated": "最新の日本ブログをチェックしよう！",
+    "type_email":"メールアドレスを入力…",
+    "subscribed":"購読してくれてありがとうございます！",
+    "error":"購読出来ませんでした。もう一度お試してください。"
   },
+  "Comments":{
+    "first":"コメント投稿しょう！",
+    "multiple_comments":"件のコメント",
+    "leave_comment":"コメント投稿",
+    "name":"お名前",
+    "comment_message":"コメント内容",
+    "submit":"投稿",
+    "comment_error":"投稿出来ませんでした。もう一度お試しください:",
+    "comment_successful":"投稿ありがとうございます！",
+    "comment_will_display_soon":"コメントがまもなく表示されます",
+    "comment_loading_comments":"コメントをロード出来ません"
+    },
   "more_stories":"もっと見る"
 }
