@@ -20,7 +20,7 @@
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.11.1",
     "install": "^0.13.0",
-    "next": "15.0.2",
+    "next": "15.0.3",
     "next-intl": "^4.3.12",
     "next-mdx-remote": "^5.0.0",
     "next-sitemap": "^4.2.3",

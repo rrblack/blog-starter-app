@@ -1,15 +1,22 @@
 {
-  "Intro": {
+  "IntroPage": {
     "title": "Kyle's Japan Life",
-    "subtitle": "Blog of my life in Japan",
+    "subtitle": "Blog of my life in",
+    "country": "Japan",
     "about_me": "About me"
   },
   "Navigation":{
-    "2019_blog": "2019 Blog (First time in Japan)",
-    "2022_blog": "2022 Blog (Covers my life in Japan from July 2022 - January 2024)"
+    "past_blogs": "Looking for past blogs?",
+    "2019_blog": "2019 Blog",
+    "details": "First time in Japan",
+    "2022_blog": "2022 Blog",
+    "details2": "Covers my life in Japan from July 2022 - January 2024"
   },
-  "Name":{
-    "Kyle_Porter": "Kyle Porter"
+  "About":{
+    "header": "Hi, I'm Kyle",
+    "p1": "Thanks for stopping in on my blog! Originally from Chattanooga Tennessee, I first came to Japan in July 2022 through the JET Programme, spending an unforgettable year in the beautiful town of Muroto, Kōchi Prefecture. That time deepened my love for Japan’s culture, language, and people.",
+    "p2": "After a year in the country side of Kōchi, I moved to the hectic and busy city of Tokyo to pursue a career in IT. I'm currently working in the tech industry, where I apply skills I taught myself through self-study. The same goes for Japanese—through consistent study and immersion, I earned the JLPT N1, the highest level of Japanese proficiency.",
+    "p3": "This blog is where I share my journey, experiences, and thoughts on life in Japan, language learning, and working in tech. Stay tuned for more interesting stories!"
   },
   "Newsletter":{
     "subscribe": "Subscribe",
@@ -27,7 +34,11 @@
     "submit":"Submit",
     "comment_error":"Failed to send comment. Please try again.",
     "comment_successful":"Comment successfully submitted!",
-    "comment_will_display_soon":"Your comment will appear shortly."
+    "comment_will_display_soon":"Your comment will appear shortly.",
+    "comment_loading_comments":"Error loading comments"
   },
-  "more_stories":"More Stories"
+  "More":{
+    "more_stories":"More Stories",
+    "see_more":"See more"
+  }
 }

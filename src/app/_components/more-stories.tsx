@@ -2,6 +2,8 @@
 import { useState } from "react";
 import { Post } from "@/interfaces/post";
 import { PostPreview } from "./post-preview";
+import { useTranslations } from "next-intl";
+
 
 type Props = {
   posts: Post[];
@@ -9,6 +11,7 @@ type Props = {
 
 export function MoreStories({ posts }: Props) {
   const [visibleCount, setVisibleCount] = useState(2); // show 3 initially
+  const t = useTranslations("More");
 
   const showMore = () => {
     setVisibleCount((prev) => prev + 3); // reveal 3 more each click
@@ -17,7 +20,7 @@ export function MoreStories({ posts }: Props) {
   return (
     <section>
       <h2 className="mb-8 text-5xl -mt-8 md:text-7xl font-bold tracking-tighter leading-tight text-red-500">
-        More Stories
+        {t("more_stories")}
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-16 lg:gap-x-22 gap-y-12 md:gap-y-12 mb-12">
@@ -40,7 +43,7 @@ export function MoreStories({ posts }: Props) {
             onClick={showMore}
             className="px-11 py-4 bg-red-500 text-white font-semibold rounded hover:bg-red-600 transition"
           >
-            See more
+            {t("see_more")}
           </button>
         </div>
       )}

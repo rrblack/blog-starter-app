@@ -32,11 +32,11 @@ export function SubscribeForm() {
       }
 
       setStatus("success");
-      setMessage("Success! Thanks for subscribing.");
+      setMessage(t('subscribed'));
       setEmail("");
     } catch (error) {
       setStatus("error");
-      setMessage("An unexpected error occurred. Please try again.");
+      setMessage(t('error'));
     }
   };
 
