@@ -5,7 +5,7 @@ import { getAllPosts } from "@/lib/api";
 import { ArchiveNavigation } from "@/app/_components/archive-navigation";
 import { Intro } from "../_components/intro";
 
-export default async function Index({ params }: { params: { locale: string } }) {
+export default async function Index({ params }: { params: Promise <{ locale: string }> }) {
   const { locale } = await params;
   const allPosts = await getAllPosts(locale);
   const heroPost = allPosts[0];

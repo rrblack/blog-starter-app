@@ -8,10 +8,12 @@ import { PostHeader } from "@/app/_components/post-header";
 import CommentSection from "@/app/_components/comments";
 import CommentViewer from "@/app/_components/view-comments";
 
+type PostParams = { locale: string; slug: string };
+
 export default async function Post({
   params,
 }: {
-  params: { locale: string; slug: string };
+  params: Promise<PostParams>;
 }) {
   const { locale, slug } = await params;
   const post = await getPostBySlug(slug, locale);
@@ -47,7 +49,7 @@ export default async function Post({
 export async function generateMetadata({
   params,
 }: {
-  params: { locale: string; slug: string };
+  params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
   const { locale, slug } = await params;
   const post = await getPostBySlug(slug, locale);
@@ -61,19 +63,4 @@ export async function generateMetadata({
       images: [post.ogImage.url],
     },
   };
-}
-
-//  Generate static params for *all* locales
-export async function generateStaticParams() {
-  const locales = ["en", "ja"]; // add more if needed
-  const allPostsByLocale = await Promise.all(
-    locales.map((locale) => getAllPosts(locale))
-  );
-
-  return allPostsByLocale.flatMap((posts, i) =>
-    posts.map((post) => ({
-      locale: locales[i],
-      slug: post.slug,
-    }))
-  );
 }

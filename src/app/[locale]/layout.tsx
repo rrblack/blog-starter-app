@@ -4,17 +4,10 @@ import { routing } from "@/i18n/routing";
 import { setRequestLocale } from "next-intl/server";
 import Footer from "@/app/_components/footer";
 import "../globals.css";
+;
 
-type Props = {
-  children: React.ReactNode;
-  params: { locale: string };
-};
+export default async function ({ params, children }: { params: Promise<{ locale: string }>; children: React.ReactNode }) { 
 
-export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
-}
-
-export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;
 
   if (!hasLocale(routing.locales, locale)) notFound();
