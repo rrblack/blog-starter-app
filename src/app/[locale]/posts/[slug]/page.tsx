@@ -8,7 +8,6 @@ import { PostHeader } from "@/app/_components/post-header";
 import CommentSection from "@/app/_components/comments";
 import CommentViewer from "@/app/_components/view-comments";
 
-export const runtime = "edge";
 type PostParams = { locale: string; slug: string };
 
 export default async function Post({
