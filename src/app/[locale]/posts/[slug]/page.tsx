@@ -64,3 +64,18 @@ export async function generateMetadata({
     },
   };
 }
+
+//  Generate static params for *all* locales
+export async function generateStaticParams() {
+  const locales = ["en", "ja"]; // add more if needed
+  const allPostsByLocale = await Promise.all(
+    locales.map((locale) => getAllPosts(locale))
+  );
+
+  return allPostsByLocale.flatMap((posts, i) =>
+    posts.map((post) => ({
+      locale: locales[i],
+      slug: post.slug,
+    }))
+  );
+}

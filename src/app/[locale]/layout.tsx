@@ -4,8 +4,6 @@ import { routing } from "@/i18n/routing";
 import { setRequestLocale } from "next-intl/server";
 import Footer from "@/app/_components/footer";
 import "../globals.css";
-;
-export const runtime = "edge";
 
 export default async function ({ params, children }: { params: Promise<{ locale: string }>; children: React.ReactNode }) { 
 
