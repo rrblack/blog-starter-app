@@ -22,13 +22,11 @@ export default function CommentSection() {
   
     try {
       // Use the supabase client to insert data
-      // Replace 'comments' with your actual table name
       const { error } = await supabase
         .from("comment_section") 
-        .insert([{ name, message,slug_id }]);
+        .insert([{ name, message, slug_id }]);
 
       if (error) {
-        // Handle potential database errors
         throw error;
       }
 

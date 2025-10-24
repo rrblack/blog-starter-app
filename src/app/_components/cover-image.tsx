@@ -28,7 +28,7 @@ const CoverImage = ({ title, src, slug }: Props) => {
       isLoading ? "opacity-0" : "opacity-100"
     )}
     sizes="100vw"
-    onLoadingComplete={() => setLoading(false)}
+    onLoad={() => setLoading(false)}
   />
 </div>
 
