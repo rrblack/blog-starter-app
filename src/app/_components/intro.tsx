@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { usePathname, useSearchParams, useParams } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
@@ -22,7 +23,9 @@ export function Intro() {
     <>
       <div>
         <div className="flex justify-end">
+          <Suspense fallback={<div>Loading...</div>}>
         <LanguageSwitcher/>
+        </Suspense>
         </div>
         <section className="flex-col md:flex-row flex items-center md:justify-between mt-16 mb-16 md:mb-12">
           {/* Title */}
