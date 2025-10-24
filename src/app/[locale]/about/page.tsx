@@ -1,5 +1,4 @@
 "use client";
-export const runtime = "edge";
 
 import Header from "@/app/_components/header";
 import Image from "next/image";
