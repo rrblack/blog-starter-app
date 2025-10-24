@@ -25,9 +25,9 @@ export default function AboutPage() {
             />
           </div>
           <p className="flex items-center md:text-center md:text-xl md:text-wrap mt-10 md:mt-10 mx-5 md:mx-60 mb-10 md:mb-15">
-            {t("p1")}。<br />
+            {t("p1")}<br />
             <br />
-           {t("p2")}。<br />
+           {t("p2")}<br />
             <br />
             {t("p3")}<br />
           </p>

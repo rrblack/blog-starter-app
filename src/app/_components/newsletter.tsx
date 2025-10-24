@@ -25,6 +25,12 @@ export function SubscribeForm() {
 
       const data = await response.json();
 
+      if (response.status === 409) {
+        setStatus("error");
+        setMessage(t(data.error));
+        return;
+      }
+
       if (!response.ok) {
         setStatus("error");
         setMessage(data.error || "An error occurred.");

@@ -1,51 +1,58 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
 
-export const runtime= 'edge';
+export const runtime = "edge";
+
+type ReqBody = { email: string;};
+
 export async function POST(req: Request) {
+  
+  const API_KEY = process.env.MAILERLITE_API_KEY;
+  const GROUP_ID = process.env.MAILERLITE_GROUP_ID; 
+
   try {
-    const { email } = await req.json();
+    const { email} = (await req.json()) as ReqBody;
 
     if (!email) {
-      return NextResponse.json({ error: 'Email is required' }, { status: 400 });
+      return NextResponse.json({ error: "Email is required" }, { status: 400 });
+    }
+    if (!API_KEY) {
+      console.error("Missing MailerLite API key");
+      return NextResponse.json({ error: "Server configuration error." }, { status: 500 });
     }
 
-    const MailchimpKey = process.env.MAILCHIMP_API_KEY;
-    const MailchimpServer = process.env.MAILCHIMP_API_SERVER;
-    const MailchimpAudience = process.env.MAILCHIMP_AUDIENCE_ID;
+    const url = "https://connect.mailerlite.com/api/subscribers";
 
-    if (!MailchimpKey || !MailchimpServer || !MailchimpAudience) {
-      console.error('Missing Mailchimp environment variables');
-      return NextResponse.json({ error: 'Server configuration error.' }, { status: 500 });
-    }
+    const payload: any = { email };
+    if (GROUP_ID) payload.groups = [GROUP_ID];
 
-    const customUrl = `https://${MailchimpServer}.api.mailchimp.com/3.0/lists/${MailchimpAudience}/members`;
-
-    const response = await fetch(customUrl, {
-      method: 'POST',
+    const res = await fetch(url, {
+      method: "POST",
       headers: {
-        Authorization: `Basic ${Buffer.from(`anystring:${MailchimpKey}`).toString('base64')}`,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${API_KEY}`,
       },
-      body: JSON.stringify({
-        email_address: email,
-        status: 'subscribed',
-      }),
+      body: JSON.stringify(payload),
     });
 
-    const data = await response.json();
+    const data = await res.json().catch(() => ({}));
 
-    if (!response.ok) {
-      // Handle specific Mailchimp error for existing members
-      if (data.title === "Member Exists") {
-        return NextResponse.json({ error: "This email is already subscribed." }, { status: 400 });
+    if (res.status === 200) {
+        return NextResponse.json({ error: "already_subbed" }, { status: 409 });
       }
-      // Handle other errors
-      return NextResponse.json({ error: data.detail || 'An error occurred.' }, { status: response.status });
+  
+    if (!res.ok) {
+      return NextResponse.json({ error: data?.message || data?.error || "An error occurred." }, { status: res.status });
     }
 
-    return NextResponse.json({ message: 'Success! Thanks for subscribing.' });
-  } catch (error) {
-    console.error('Error:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    return NextResponse.json({ message: "Success! Thanks for subscribing.", 
+      subscriber:{
+        email: data.data.email,
+      },
+     });
+
+    
+  } catch (err: any) {
+    console.error("Subscribe error:", err);
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }

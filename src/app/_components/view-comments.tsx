@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
-import { set } from "date-fns";
 import Spinner from "./comment_spinner";
 import { useTranslations } from "next-intl";
 

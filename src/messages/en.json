@@ -23,6 +23,7 @@
     "stay_updated": "Stay up to date on my latest Japan blogs!",
     "type_email":"Type your email…",
     "subscribed":"Success! Thanks for subscribing.",
+    "already_subbed":"This email is already subscribed.",
     "error":"An unexpected error occurred. Please try again."
   },
   "Comments":{
