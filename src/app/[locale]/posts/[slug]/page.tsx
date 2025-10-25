@@ -7,7 +7,8 @@ import Header from "@/app/_components/header";
 import { PostHeader } from "@/app/_components/post-header";
 import CommentSection from "@/app/_components/comments";
 import CommentViewer from "@/app/_components/view-comments";
-import { connection } from 'next/server';
+import { Suspense } from "react";
+
 
 type PostParams = { locale: string; slug: string };
 
@@ -20,13 +21,15 @@ export default async function Post({
   const post = await getPostBySlug(slug, locale);
 
   if (!post) return notFound();
+
   
-  await connection()
   return (
     <main>
       <Alert preview={post.preview} />
       <Container>
+        <Suspense fallback={null}>
         <Header />
+        </Suspense>
         <article className="mb-32">
           <PostHeader
             title={post.title}

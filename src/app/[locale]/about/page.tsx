@@ -4,13 +4,16 @@ import Header from "@/app/_components/header";
 import Image from "next/image";
 import Container from "@/app/_components/container";
 import { useTranslations } from "next-intl";
+import { Suspense } from "react";
 
 export default function AboutPage() {
   const t = useTranslations("About");
   return (
     <main>
       <Container>
+        <Suspense fallback={null}>
         <Header />
+        </Suspense>
         <div className="md:mt-36 mt-2">
           <h1 className="md:-mt-20 text-center text-4xl break-keep md:text-8xl mb-12">
             {t("header")}
