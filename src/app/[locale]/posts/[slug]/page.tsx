@@ -7,7 +7,6 @@ import Header from "@/app/_components/header";
 import { PostHeader } from "@/app/_components/post-header";
 import CommentSection from "@/app/_components/comments";
 import CommentViewer from "@/app/_components/view-comments";
-import { Suspense } from "react";
 
 
 type PostParams = { locale: string; slug: string };
@@ -27,9 +26,7 @@ export default async function Post({
     <main>
       <Alert preview={post.preview} />
       <Container>
-        <Suspense fallback={null}>
         <Header />
-        </Suspense>
         <article className="mb-32">
           <PostHeader
             title={post.title}

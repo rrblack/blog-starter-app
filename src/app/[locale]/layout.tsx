@@ -5,6 +5,12 @@ import { setRequestLocale } from "next-intl/server";
 import Footer from "@/app/_components/footer";
 import "../globals.css";
 
+export const runtime = 'edge';
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
 export default async function ({ params, children }: { params: Promise<{ locale: string }>; children: React.ReactNode }) { 
 
   const { locale } = await params;

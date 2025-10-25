@@ -6,6 +6,8 @@ import Container from "@/app/_components/container";
 import { useTranslations } from "next-intl";
 import { Suspense } from "react";
 
+export const runtime = 'edge';
+
 export default function AboutPage() {
   const t = useTranslations("About");
   return (
