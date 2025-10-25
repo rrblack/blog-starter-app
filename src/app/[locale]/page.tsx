@@ -4,6 +4,7 @@ import { MoreStories } from "@/app/_components/more-stories";
 import { getAllPosts } from "@/lib/api";
 import { ArchiveNavigation } from "@/app/_components/archive-navigation";
 import { Intro } from "../_components/intro";
+import { Suspense } from "react";
 
 export default async function Index({ params }: { params: Promise <{ locale: string }> }) {
   const { locale } = await params;
@@ -14,7 +15,9 @@ export default async function Index({ params }: { params: Promise <{ locale: str
   return (
     <main>
       <Container>
+        <Suspense fallback={null}>
         <Intro /> 
+        </Suspense>
         <ArchiveNavigation />
         <HeroPost {...heroPost} />
         {morePosts.length > 0 && <MoreStories posts={morePosts} />}
