@@ -12,7 +12,7 @@ export default function AboutPage() {
       <Container>
         <Header />
         <div className="md:mt-36 mt-2">
-          <h1 className="md:-mt-20 text-center text-4xl md:text-8xl mb-12">
+          <h1 className="md:-mt-20 text-center text-4xl break-keep md:text-8xl mb-12">
             {t("header")}
           </h1>
           <div className="md:mt-20">

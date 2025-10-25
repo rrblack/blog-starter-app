@@ -51,7 +51,7 @@ export function SubscribeForm() {
       onSubmit={handleSubmit}
       className="rounded px-8 pt-6 pb-8 mb-4 max-w-2xl center mx-auto"
     >
-      <h2 className="text-center text-2xl text-red-500 font-semibold">
+      <h2 className="text-center text-2xl text-red-500 break-keep font-semibold">
         {t('stay_updated')}
       </h2>
       <div className="mt-4 flex">
