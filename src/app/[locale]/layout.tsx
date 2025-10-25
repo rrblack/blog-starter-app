@@ -5,7 +5,6 @@ import { setRequestLocale } from "next-intl/server";
 import Footer from "@/app/_components/footer";
 import "../globals.css";
 
-export const runtime = 'edge';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
