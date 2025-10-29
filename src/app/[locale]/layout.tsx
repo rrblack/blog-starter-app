@@ -6,8 +6,8 @@ import Footer from "@/app/_components/footer";
 import "../globals.css";
 
 
-export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
+export async function generateStaticParams() {
+  return ["en", "ja"].map((locale) => ({ locale }));
 }
 
 export default async function ({ params, children }: { params: Promise<{ locale: string }>; children: React.ReactNode }) { 
