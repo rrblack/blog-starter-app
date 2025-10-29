@@ -51,7 +51,7 @@ export function SubscribeForm() {
       onSubmit={handleSubmit}
       className="rounded px-8 pt-6 pb-8 mb-4 max-w-2xl center mx-auto"
     >
-      <h2 className="text-center text-2xl text-red-500 break-keep font-semibold">
+      <h2 className="text-center text-2xl text-red-500 break-keep break-words font-semibold whitespace-normal">
         {t('stay_updated')}
       </h2>
       <div className="mt-4 flex">
@@ -65,7 +65,7 @@ export function SubscribeForm() {
           required
         />
         <button
-          className="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline h-14 disabled:bg-slate-400"
+          className="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline h-14 disabled:bg-slate-400 break-keep break-words whitespace-normal"
           type="submit"
           disabled={status === "loading"}
         >
