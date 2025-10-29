@@ -9,9 +9,6 @@ import { routing } from "@/i18n/routing";
 import { setRequestLocale } from "next-intl/server";
 import Footer from "@/app/_components/footer";
 
-export const dynamic = "force-dynamic";
-
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {

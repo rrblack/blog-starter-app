@@ -32,7 +32,6 @@ export function MoreStories({ posts }: Props) {
             date={post.date}
             slug={post.slug}
             excerpt={post.excerpt}
-            locale={post.locale}
           />
         ))}
       </div>

@@ -8,7 +8,6 @@ import { PostHeader } from "@/app/_components/post-header";
 import CommentSection from "@/app/_components/comments";
 import CommentViewer from "@/app/_components/view-comments";
 
-
 type PostParams = { locale: string; slug: string };
 
 export default async function Post({
@@ -33,7 +32,6 @@ export default async function Post({
             coverImage={post.coverImage}
             date={post.date}
             author={post.author}
-            locale={post.locale}
           />
           <div className="flex justify-center">
             <div className="prose prose-lg prose-invert max-w-3xl w-full px-4 text-white">

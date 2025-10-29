@@ -3,7 +3,6 @@ import fs from "fs";
 import { join } from "path";
 import { compileMDX } from "next-mdx-remote/rsc";
 import rehypeHighlight from "rehype-highlight";
-import { useMDXComponents } from "@/mdx-components";
 
 const postsDirectory = join(process.cwd(), "_posts");
 
@@ -21,18 +20,15 @@ export async function getPostBySlug(slug: string, locale: string): Promise<Post 
   const fileContents = fs.readFileSync(fullPath, "utf8");
 
   const { frontmatter, content } = await compileMDX({
-    source: fileContents,
-    components: useMDXComponents(),
-    options: {
-      parseFrontmatter: true,
-      mdxOptions: { rehypePlugins: [rehypeHighlight] },
-    },
-  });
+  source: fileContents,
+  // no components here on server
+  options: { parseFrontmatter: true, mdxOptions: { rehypePlugins: [rehypeHighlight] } },
+});
+
 
   return {
     ...frontmatter,
     slug,
-    locale,
     content,
   } as Post;
 }

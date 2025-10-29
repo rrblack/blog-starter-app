@@ -6,8 +6,6 @@ import { ArchiveNavigation } from "@/app/_components/archive-navigation";
 import { Intro } from "../_components/intro";
 import { Suspense } from "react";
 
-export const dynamic = "force-dynamic";
-
 export default async function Index({ params }: { params: Promise <{ locale: string }> }) {
   const { locale } = await params;
   const allPosts = await getAllPosts(locale);

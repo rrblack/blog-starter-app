@@ -1,6 +1,25 @@
+"use client";
+
 import Link from "next/link";
 import CoverImage from "./cover-image";
 import DateFormatter from "./date-formatter";
+import { usePathname, useParams } from "next/navigation";
+
+const LOCALES = ["en", "ja"];
+const DEFAULT_LOCALE = "en";
+const COOKIE_NAME = "USER_LOCALE";
+const COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
+
+function setLocaleCookie(locale: string) {
+  try {
+    document.cookie = `${COOKIE_NAME}=${encodeURIComponent(locale)}; Path=/; Max-Age=${COOKIE_MAX_AGE}; SameSite=Lax; Secure`;
+  } catch {}
+}
+
+function makeLocalizedHref(path: string, currentLocale: string) {
+  if (!path.startsWith("/")) path = `/${path}`;
+  return `/${currentLocale}${path === "/" ? "" : path}`;
+}
 
 type Props = {
   title: string;
@@ -8,7 +27,6 @@ type Props = {
   date: string;
   excerpt: string;
   slug: string;
-  locale: string;
 };
 
 export function PostPreview({
@@ -17,23 +35,39 @@ export function PostPreview({
   date,
   excerpt,
   slug,
-  locale,
 }: Props) {
+  const pathname = usePathname() || "/";
+  const params = useParams() as { locale?: string } | undefined;
+  const paramLocale = params?.locale;
+  const firstSeg = pathname.split("/")[1];
+  const currentLocale = paramLocale ?? (LOCALES.includes(firstSeg) ? firstSeg : DEFAULT_LOCALE);
+
+  const postPath = `/posts/${slug}`;
+  const localizedHref = makeLocalizedHref(postPath, currentLocale);
+
   return (
     <div>
       <div className="mb-5">
-        <CoverImage slug={slug} title={title} src={coverImage} />
+        <Link href={localizedHref} onClick={() => setLocaleCookie(currentLocale)} aria-label={title}>
+          <CoverImage title={title} src={coverImage} onClick={() => { /* optional extra */ }} />
+        </Link>
       </div>
       <h3 className="text-3xl mb-3 leading-snug">
-        <Link href={`/posts/${slug}`} className="inline-block text-red-500 hover:text-red-300 transform transition-transform hover:scale-105 hover:-rotate-1">
+        <Link
+          href={localizedHref}
+          onClick={() => setLocaleCookie(currentLocale)}
+          className="inline-block text-red-500 hover:text-red-300 transform transition-transform hover:scale-105 hover:-rotate-1"
+        >
           {title}
         </Link>
       </h3>
       <div className="text-lg mb-4">
-        <DateFormatter dateString={date} locale={locale} />
+        <DateFormatter dateString={date} />
       </div>
-      <div> <Link href={`/posts/${slug}`} className="text-lg leading-relaxed mb-4">
-      <p className="text-lg leading-relaxed mb-4">{excerpt}</p></Link>
+      <div>
+        <Link href={localizedHref} onClick={() => setLocaleCookie(currentLocale)} className="text-lg leading-relaxed mb-4">
+          <p className="text-lg leading-relaxed mb-4">{excerpt}</p>
+        </Link>
       </div>
     </div>
   );
