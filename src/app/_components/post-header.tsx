@@ -1,4 +1,3 @@
-import { cookies } from 'next/headers'
 import Avatar from "./avatar";
 import CoverImage from "./cover-image";
 import DateFormatter from "./date-formatter";
@@ -6,17 +5,15 @@ import { PostTitle } from "@/app/_components/post-title";
 import { type Author } from "@/interfaces/author";
 import Link from "next/link";
 
-
 type Props = {
   title: string;
   coverImage: string;
   date: string;
   author: Author;
+  locale: string;
 };
 
-export async function PostHeader({ title, coverImage, date, author }: Props) {
-const cookieStore = await cookies();
-const locale = cookieStore.get("USER_LOCALE")?.value;
+export async function PostHeader({ title, coverImage, date, author, locale }: Props) {
 ;
   return (
     <>

@@ -32,6 +32,7 @@ export default async function Post({
             coverImage={post.coverImage}
             date={post.date}
             author={post.author}
+            locale={locale}
           />
           <div className="flex justify-center">
             <div className="prose prose-lg prose-invert max-w-3xl w-full px-4 text-white">
