@@ -6,16 +6,13 @@ const withNextIntl = createNextIntlPlugin();
 const withMDX = createMDX({
   extension: /\.mdx?$/,
   options: {
-    remarkPlugins: [remarkGfm],
+    remarkPlugins: ["remarkGfm"],
     rehypePlugins: [],
   },
 });
 
 const nextConfig = {
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
-  experimental: {
-    mdxRs: false,
-  },
 };
 
 export default withNextIntl(withMDX(nextConfig));
