@@ -1,5 +1,4 @@
-// lib/formatDate.ts
-export function formatDate(dateString: string, locale: string = "en") {
+export function formatDate(dateString: string, locale: string) {
   const date = new Date(dateString);
 
   if (locale === "ja") {

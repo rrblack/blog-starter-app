@@ -28,7 +28,7 @@ export async function PostHeader({ title, coverImage, date, author, locale }: Pr
         </Link>
       </div>
         <div className="mb-6 text-lg">
-          <DateFormatter dateString={date}/>
+          <DateFormatter dateString={date} locale={locale}/>
         </div>
       </div>
     </>

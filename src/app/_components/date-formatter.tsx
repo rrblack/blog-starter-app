@@ -3,7 +3,7 @@ type Props = {
   locale?: string;
 };
 
-export default function DateFormatter({ dateString, locale = "en" }: Props) {
+export default function DateFormatter({ dateString, locale }: Props) {
   const date = new Date(dateString);
   
   if (isNaN(date.getTime())) {

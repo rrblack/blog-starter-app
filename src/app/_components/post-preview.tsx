@@ -62,7 +62,7 @@ export function PostPreview({
         </Link>
       </h3>
       <div className="text-lg mb-4">
-        <DateFormatter dateString={date} />
+        <DateFormatter dateString={date} locale={currentLocale} />
       </div>
       <div>
         <Link href={localizedHref} onClick={() => setLocaleCookie(currentLocale)} className="text-lg leading-relaxed mb-4">
