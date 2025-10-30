@@ -1,10 +1,21 @@
 "use client";
 
 import { Suspense } from "react";
-import { usePathname, useSearchParams, useParams } from "next/navigation";
+import { usePathname, useParams } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import LanguageSwitcher from "./language-switcher";
+
+
+function makeLocalizedHref(path: string, currentLocale: string) {
+  if (!path.startsWith("/")) path = `/${path}`;
+  return `/${currentLocale}${path === "/" ? "" : path}`;
+}
+
+const LOCALES = ["en", "ja"];
+const DEFAULT_LOCALE = "en";
+const COOKIE_NAME = "USER_LOCALE";
+const COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
 
 export function Intro() {
   const t = useTranslations("IntroPage");
@@ -12,12 +23,13 @@ export function Intro() {
   const subtitle = t("subtitle");
 
   const pathname = usePathname() || "/";
-  const searchParams = useSearchParams();
-  const search = searchParams ? `?${searchParams.toString()}` : "";
-  const params = useParams();
-  const paramLocale = (params as { locale?: string })?.locale;
+  const params = useParams() as { locale?: string } | undefined;
+  const paramLocale = params?.locale;
   const firstSeg = pathname.split("/")[1];
-  const currentLocale = paramLocale ?? (firstSeg === "en" || firstSeg === "ja" ? firstSeg : "en");
+  const currentLocale = paramLocale ?? (LOCALES.includes(firstSeg) ? firstSeg : DEFAULT_LOCALE);
+  
+  const aboutBase = `/about`;
+  const localizedPostHref = makeLocalizedHref(aboutBase, currentLocale);
 
   return (
     <>
@@ -47,7 +59,7 @@ export function Intro() {
           </h4>
         )}
         <Link
-          href="/about/"
+          href={localizedPostHref}
           className="text-xl text-white font-bold hover:text-red-500 mt-2 md:mt-3 hover:scale-110 transform transition-transform shadow-red-500/70"
         >
           {t("about_me")}
