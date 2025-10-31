@@ -12,9 +12,11 @@ import Footer from "@/app/_components/footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: `Kyle's Japan Life`,
-  description: `Blog of my life in Japan`,
+  title: "Kyle's Japan Life",
+  description: "Blog of my life in Japan",
   openGraph: {
+    title: "Kyle's Japan Life",
+    description: "Blog of my life in Japan",
     images: [HOME_OG_IMAGE_URL],
   },
 };
