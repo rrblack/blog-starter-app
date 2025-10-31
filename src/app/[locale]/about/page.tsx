@@ -4,40 +4,56 @@ import Header from "@/app/_components/header";
 import Image from "next/image";
 import Container from "@/app/_components/container";
 import { useTranslations } from "next-intl";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 
 export const runtime = 'edge';
 
 export default function AboutPage() {
   const t = useTranslations("About");
-  return (
-    <main>
-      <Container>
-        <Suspense fallback={null}>
-        <Header />
-        </Suspense>
-        <div className="md:mt-36 mt-2">
-          <h1 className="md:-mt-20 text-center text-4xl break-keep break-words whitespace-normal md:text-4xl mb-12">
-            {t("header")}
-          </h1>
-          <div className="md:mt-20">
-            <Image
-              src="/assets/blog/authors/Img_2025_02_16_00_19_00.jpeg"
-              alt="著者の写真"
-              width={300}
-              height={400}
-              className="rounded-l-full mx-auto mt-10"
-            />
+
+  useEffect(() => {
+    console.log("AboutPage mounted");
+    try {
+      console.log("Translation header:", t("header"));
+      console.log("Translation p1:", t("p1"));
+      console.log("Translation p2:", t("p2"));
+      console.log("Translation p3:", t("p3"));
+    } catch (err) {
+      console.error("Translation error in AboutPage:", err);
+    }
+  }, []);
+
+  try {
+    return (
+      <main>
+        <Container>
+          <Suspense fallback={null}>
+            <Header />
+          </Suspense>
+          <div className="md:mt-36 mt-2">
+            <h1 className="md:-mt-20 text-center text-4xl break-keep break-words whitespace-normal md:text-4xl mb-12">
+              {t("header")}
+            </h1>
+            <div className="md:mt-20">
+              <Image
+                src="/assets/blog/authors/Img_2025_02_16_00_19_00.jpeg"
+                alt="著者の写真"
+                width={300}
+                height={400}
+                className="rounded-l-full mx-auto mt-10"
+              />
+            </div>
+            <p className="flex items-center md:text-center md:text-xl md:text-wrap mt-10 md:mt-10 mx-5 md:mx-60 mb-10 md:mb-15">
+              {t("p1")}<br /><br />
+              {t("p2")}<br /><br />
+              {t("p3")}<br />
+            </p>
           </div>
-          <p className="flex items-center md:text-center md:text-xl md:text-wrap mt-10 md:mt-10 mx-5 md:mx-60 mb-10 md:mb-15">
-            {t("p1")}<br />
-            <br />
-           {t("p2")}<br />
-            <br />
-            {t("p3")}<br />
-          </p>
-        </div>
-      </Container>
-    </main>
-  );
+        </Container>
+      </main>
+    );
+  } catch (err) {
+    console.error("Render error in AboutPage:", err);
+    return <div>Something went wrong rendering the About page.</div>;
+  }
 }
