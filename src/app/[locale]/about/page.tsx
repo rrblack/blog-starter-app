@@ -1,29 +1,22 @@
-"use client";
-
+// app/[locale]/about/page.tsx
 import Header from "@/app/_components/header";
 import Image from "next/image";
 import Container from "@/app/_components/container";
-import { useTranslations } from "next-intl";
-import { Suspense, useEffect } from "react";
+import { getTranslations } from "next-intl/server"; // server-side translation hook
+import { Suspense } from "react";
 
 export const runtime = 'edge';
 
-export default function AboutPage() {
-  const t = useTranslations("About");
-
-  useEffect(() => {
-    console.log("AboutPage mounted");
-    try {
-      console.log("Translation header:", t("header"));
-      console.log("Translation p1:", t("p1"));
-      console.log("Translation p2:", t("p2"));
-      console.log("Translation p3:", t("p3"));
-    } catch (err) {
-      console.error("Translation error in AboutPage:", err);
-    }
-  }, []);
-
+export default async function AboutPage() {
   try {
+    const t = await getTranslations("About");
+
+    console.log("AboutPage server render started");
+    console.log("Translation header:", t("header"));
+    console.log("Translation p1:", t("p1"));
+    console.log("Translation p2:", t("p2"));
+    console.log("Translation p3:", t("p3"));
+
     return (
       <main>
         <Container>
@@ -53,7 +46,7 @@ export default function AboutPage() {
       </main>
     );
   } catch (err) {
-    console.error("Render error in AboutPage:", err);
-    return <div>Something went wrong rendering the About page.</div>;
+    console.error("500 error in AboutPage server component:", err);
+    throw err; // ensures Cloudflare logs it
   }
 }
