@@ -1,5 +1,5 @@
 import { HOME_OG_IMAGE_URL } from "@/lib/constants";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import cn from "classnames";
 import "../globals.css";
@@ -19,12 +19,13 @@ export const metadata: Metadata = {
     description: "Blog of my life in Japan",
     images: [HOME_OG_IMAGE_URL],
   },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,   // disables browser zoom
-    userScalable: false,
-  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 export async function generateStaticParams() {
