@@ -38,7 +38,7 @@ export default async function Post({
           <div className="flex justify-center">
             <div className="prose prose-lg prose-invert max-w-3xl w-full px-4 text-white prose-img:rounded-lg prose-img:max-xl 
             prose-a:text-red-500 hover:prose-a:text-red-400 transition-colors duration-200 prose-video:rounded-lg prose-blockquote:border-l-red-500 ">
-              <LightboxWrapper images={post.images}>
+              <LightboxWrapper>
               {post.content}
               </LightboxWrapper>
             </div>
