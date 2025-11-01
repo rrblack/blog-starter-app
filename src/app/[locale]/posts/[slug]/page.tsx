@@ -11,6 +11,11 @@ import LightboxWrapper from "@/app/_components/lightbox-component";
 
 type PostParams = { locale: string; slug: string };
 
+// Utility to strip HTML tags for metadata
+function stripHtml(html: string): string {
+  return html.replace(/<[^>]*>?/gm, "");
+}
+
 export default async function Post({
   params,
 }: {
@@ -21,7 +26,6 @@ export default async function Post({
 
   if (!post) return notFound();
 
-  
   return (
     <main>
       <Alert preview={post.preview} />
@@ -29,7 +33,7 @@ export default async function Post({
         <Header />
         <article className="mb-32">
           <PostHeader
-            title={post.title}
+            title={post.title} // keep styled HTML here
             coverImage={post.coverImage}
             date={post.date}
             author={post.author}
@@ -38,9 +42,7 @@ export default async function Post({
           <div className="flex justify-center">
             <div className="prose prose-lg prose-invert max-w-3xl w-full px-4 text-white prose-img:rounded-lg prose-img:max-xl 
             prose-a:text-red-500 hover:prose-a:text-red-400 transition-colors duration-200 prose-video:rounded-lg prose-blockquote:border-l-red-500 ">
-              <LightboxWrapper>
-              {post.content}
-              </LightboxWrapper>
+              <LightboxWrapper>{post.content}</LightboxWrapper>
             </div>
           </div>
         </article>
@@ -61,16 +63,18 @@ export async function generateMetadata({
 
   if (!post) return notFound();
 
+  const plainTitle = stripHtml(post.title);
+
   return {
-    title: `${post.title} | Kyle's Japan Life`,
+    title: `${plainTitle} | Kyle's Japan Life`,
     openGraph: {
-      title: post.title,
+      title: plainTitle,
       images: [post.ogImage.url],
     },
   };
 }
 
-//  Generate static params for *all* locales
+// Generate static params for *all* locales
 export async function generateStaticParams() {
   const locales = ["en", "ja"]; // add more if needed
   const allPostsByLocale = await Promise.all(
