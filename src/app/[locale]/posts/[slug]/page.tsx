@@ -71,6 +71,13 @@ export async function generateMetadata({
       title: plainTitle,
       images: [post.ogImage.url],
     },
+    alternates: {
+  canonical: `https://kylesjapan.life/${locale}/posts/${slug}`,
+  languages: {
+    en: `https://kylesjapan.life/en/posts/${slug}`,
+    ja: `https://kylesjapan.life/ja/posts/${slug}`,
+  },
+}
   };
 }
 
