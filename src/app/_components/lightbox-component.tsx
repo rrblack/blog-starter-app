@@ -61,6 +61,10 @@ export default function LightboxWrapper({
             doubleTapDelay: 300,
             doubleClickDelay: 300,
           }}
+          controller={{
+            closeOnBackdropClick: true,
+            closeOnPullDown: true,
+         }}
         />
       )}
     </>
