@@ -16,6 +16,15 @@ const nextConfig = {
   experimental: {
     mdxRs: false,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'photo.kyles-app.click',
+        pathname: '/**',
+      },
+    ],
+  },
 };
 
 export default withNextIntl(withMDX(nextConfig));

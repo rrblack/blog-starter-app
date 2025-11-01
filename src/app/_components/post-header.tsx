@@ -14,21 +14,23 @@ type Props = {
 };
 
 export async function PostHeader({ title, coverImage, date, author, locale }: Props) {
-;
   return (
     <>
-      <PostTitle>{title}</PostTitle>
+      <h1
+        className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-tight md:leading-none mb-12 text-center md:text-left"
+        dangerouslySetInnerHTML={{ __html: title }}
+      />
       <div className="mb-8 md:mb-16 sm:mx-0">
         <CoverImage title={title} src={coverImage} />
       </div>
       <div className="max-w-2xl mx-auto">
         <div className="inline-block mb-5 md:mb-4 md:-mt-10 hover:text-red-500">
-        <Link href={`/${locale}/about`}>
-          <Avatar name={author.name} picture={author.picture} />
-        </Link>
-      </div>
+          <Link href={`/${locale}/about`}>
+            <Avatar name={author.name} picture={author.picture} />
+          </Link>
+        </div>
         <div className="mb-6 text-lg">
-          <DateFormatter dateString={date} locale={locale}/>
+          <DateFormatter dateString={date} locale={locale} />
         </div>
       </div>
     </>

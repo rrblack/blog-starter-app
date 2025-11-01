@@ -12,3 +12,14 @@
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
 }
+
+.prose img {
+  max-width: 150% !important;
+  width: 100%;
+  height: auto;
+}
+.prose img {
+  max-width: 150%;
+  width: 100%;
+}
+

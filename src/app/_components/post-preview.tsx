@@ -52,13 +52,13 @@ export function PostPreview({
           <CoverImage title={title} src={coverImage} onClick={() => { /* optional extra */ }} />
         </Link>
       </div>
-      <h3 className="text-3xl mb-3 leading-snug">
+      <h3 className="text-3xl mb-3 leading-snug font-semibold">
         <Link
           href={localizedHref}
           onClick={() => setLocaleCookie(currentLocale)}
-          className="inline-block text-red-500 hover:text-red-300 transform transition-transform hover:scale-105 hover:-rotate-1"
+          className="inline-block text-white hover:text-slate-200 transform transition-transform hover:scale-105 hover:-rotate-1"
         >
-          {title}
+          <span dangerouslySetInnerHTML={{ __html: title }} />
         </Link>
       </h3>
       <div className="text-lg mb-4">
