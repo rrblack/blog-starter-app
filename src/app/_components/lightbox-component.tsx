@@ -4,6 +4,9 @@ import * as React from "react";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
+// import the zoom plugin + styles
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
+
 export default function LightboxWrapper({
   children,
 }: {
@@ -19,11 +22,9 @@ export default function LightboxWrapper({
     if (!container) return;
 
     const imgEls = Array.from(container.querySelectorAll("img"));
-    
-    // Get the actual src URLs from the rendered images (already absolute)
     const urls = imgEls.map((img) => img.src);
     setImageUrls(urls);
-    
+
     const handleClick = (i: number) => () => {
       setIndex(i);
       setOpen(true);
@@ -36,7 +37,6 @@ export default function LightboxWrapper({
       return { img, handler };
     });
 
-    // Cleanup
     return () => {
       handlers.forEach(({ img, handler }) => {
         img.removeEventListener("click", handler);
@@ -53,6 +53,14 @@ export default function LightboxWrapper({
           close={() => setOpen(false)}
           index={index}
           slides={imageUrls.map((src) => ({ src }))}
+          plugins={[Zoom]}
+          // optional: tweak zoom behavior
+          zoom={{
+            maxZoomPixelRatio: 3, // how far user can zoom
+            zoomInMultiplier: 1.5,
+            doubleTapDelay: 300,
+            doubleClickDelay: 300,
+          }}
         />
       )}
     </>
