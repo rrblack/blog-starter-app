@@ -14,8 +14,6 @@ function makeLocalizedHref(path: string, currentLocale: string) {
 
 const LOCALES = ["en", "ja"];
 const DEFAULT_LOCALE = "en";
-const COOKIE_NAME = "USER_LOCALE";
-const COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
 
 export function Intro() {
   const t = useTranslations("IntroPage");
