@@ -19,6 +19,7 @@ export const metadata: Metadata = {
     description: "Blog of my life in Japan",
     images: [HOME_OG_IMAGE_URL],
   },
+  
 };
 
 export const viewport: Viewport = {
