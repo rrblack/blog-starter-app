@@ -66,6 +66,7 @@ export default async function LocaleLayout({
         <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
         <meta name="theme-color" content="#000" />
         <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
+        <link rel="icon" href="favicon/favicon.svg" type="image/svg+xml" />
       </head>
       <body className={cn(inter.className, "dark:bg-slate-900 dark:text-slate-400")}>
         <NextIntlClientProvider locale={locale} messages={messages}>

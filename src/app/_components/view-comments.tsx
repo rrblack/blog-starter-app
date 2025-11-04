@@ -49,15 +49,22 @@ export default function CommentViewer() {
     }
   }
 
-  async function translateComments(id: string, message: string) {
+  async function translateComments(id: string, message: string, locale: string) {
     setLoadingCommentId(id);
+    let translate_into = "";
+
+    if (locale === "en") {
+      translate_into = "EN";
+    } else {
+      translate_into = "JA";
+    }
     try {
       const res= await fetch("/api/comment-translation", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ id, message }),
+        body: JSON.stringify({ id, message, translate_into }),
       });
 
       const data = await res.json();
@@ -70,15 +77,21 @@ export default function CommentViewer() {
         );
       }
     } catch (error) {
-      console.error("failed", error)
+      console.error("Error:", error)
     } finally {
       setLoadingCommentId(null)
     }
 
   };
 
-  function isEnglish(text: string): boolean {const asciiChars = text.split("").filter((char) => char.charCodeAt(0) <= 127);
+  function isEnglish(text: string): boolean {
+    const asciiChars = text.split("").filter((char) => char.charCodeAt(0) <= 127);
   return asciiChars.length / text.length > 0.9; // 90% ASCII = likely English
+}
+
+  function isJapanese(text: string): boolean {
+    const nonAsciiChars = text.split("").filter((char) => char.charCodeAt(0) > 127);
+  return nonAsciiChars.length / text.length > 0.5; // 50% not ASCII = likely Japanese
 }
 
 
@@ -113,9 +126,18 @@ return (
           <button
             className="text-red-500"
             type="button"
-            onClick={() => translateComments(comment.id, comment.message)}
+            onClick={() => translateComments(comment.id, comment.message, locale)}
           >
             コメントを翻訳する
+          </button>
+        )}
+        {locale === "en" && isJapanese(comment.message) && (
+          <button
+            className="text-red-500"
+            type="button"
+            onClick={() => translateComments(comment.id, comment.message, locale)}
+          >
+            Translate comment
           </button>
         )}
       </div>
