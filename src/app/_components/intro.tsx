@@ -33,7 +33,7 @@ export function Intro() {
     <>
       <div>
         <div className="flex justify-end">
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={null}>
         <LanguageSwitcher/>
         </Suspense>
         </div>
