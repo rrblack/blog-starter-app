@@ -6,7 +6,6 @@ import Container from "@/app/_components/container";
 import Header from "@/app/_components/header";
 import { PostHeader } from "@/app/_components/post-header";
 import CommentSection from "@/app/_components/comments";
-import CommentViewer from "@/app/_components/view-comments";
 import LightboxWrapper from "@/app/_components/lightbox-component";
 
 type PostParams = { locale: string; slug: string };
@@ -47,7 +46,6 @@ export default async function Post({
           </div>
         </article>
       </Container>
-      <CommentViewer />
       <CommentSection />
     </main>
   );
