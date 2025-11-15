@@ -163,7 +163,7 @@ export default function CommentSection() {
             <h2 className="text-sm text-gray-600 mb-1">
               {new Date(comment.created_at).toLocaleString()}
             </h2>
-            <main className="text-white">
+            <main className="text-white whitespace-pre-wrap">
               {loadingCommentId === comment.id ? (
                 <Spinner />
               ) : (
