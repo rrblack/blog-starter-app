@@ -22,7 +22,6 @@ export async function POST(req:Request) {
     });
 
     const data= await res.json();
-    console.log("maybe this is bug?:", message, translate_into)
     return NextResponse.json({ translation: data.translations[0].text});
    } catch(error) {
     console.error("error:", error)

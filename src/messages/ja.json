@@ -28,6 +28,7 @@
   },
   "Comments":{
     "first":"コメント投稿しよう！",
+    "one_comment":"件のコメント",
     "multiple_comments":"件のコメント",
     "leave_comment":"コメント投稿",
     "name":"お名前",

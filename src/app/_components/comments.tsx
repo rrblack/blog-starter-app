@@ -152,13 +152,17 @@ export default function CommentSection() {
             comments.length === 0
               ? t("first")
               : comments.length === 1
-              ? `1 ${t("multiple_comments")}`
-              : `${comments.length} ${t("multiple_comments")}`
+              ? <>
+                <span className="text-red-500">1</span> {t("one_comment")}
+                </>
+              : <>
+              <span className="text-red-500">{comments.length} </span> {t("multiple_comments")}
+              </> 
           )}
         </h1>
 
         {loadStatus === "success" && comments.map((comment) => (
-          <div key={comment.id} className="max-w-2xl mx-auto my-10 p-5 border rounded">
+          <div key={comment.id} className="max-w-2xl mx-auto my-10 p-5 border rounded border-red-500">
             <h1 className="text-2xl text-red-600 font-semibold">{comment.name}</h1>
             <h2 className="text-sm text-gray-600 mb-1">
               {new Date(comment.created_at).toLocaleString()}
