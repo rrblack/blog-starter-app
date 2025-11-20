@@ -164,7 +164,7 @@ export default function CommentSection() {
         {loadStatus === "success" && comments.map((comment) => (
           <div key={comment.id} className="max-w-2xl mx-auto my-10 p-5 border rounded border-red-500">
             <h1 className="text-2xl text-red-600 font-semibold">{comment.name}</h1>
-            <h2 className="text-sm text-gray-600 mb-1">
+            <h2 className="text-sm text-gray-400 mb-1">
               {new Date(comment.created_at).toLocaleString()}
             </h2>
             <main className="text-white whitespace-pre-wrap">
