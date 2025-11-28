@@ -40,7 +40,7 @@ export function MoreStories({ posts }: Props) {
         <div className="flex justify-center">
           <button
             onClick={showMore}
-            className="px-11 py-4 bg-red-500 text-white font-semibold rounded hover:bg-red-600 transition"
+            className="px-11 py-4 bg-red-700 text-white font-semibold rounded hover:bg-red-800 transition"
           >
             {t("see_more")}
           </button>

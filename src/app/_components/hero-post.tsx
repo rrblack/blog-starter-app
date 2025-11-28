@@ -76,7 +76,9 @@ export function HeroPost({
 
         <div>
           <Link href={localizedPostHref} onClick={() => setLocaleCookie(currentLocale)} className="text-lg leading-relaxed mb-4">
-            <p className="inline-block transform transition-transform hover:scale-y-105 text-lg leading-relaxed mb-4">{excerpt}</p>
+            <div className="inline-block transform transition-transform hover:scale-y-105 text-lg leading-relaxed mb-4">
+              <span dangerouslySetInnerHTML={{__html:excerpt}}/>
+            </div>
           </Link>
 
           <Link href={`/${currentLocale}/about`} onClick={() => setLocaleCookie(currentLocale)} className="inline-block hover:text-red-500">

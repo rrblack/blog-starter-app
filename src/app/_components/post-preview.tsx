@@ -66,7 +66,9 @@ export function PostPreview({
       </div>
       <div>
         <Link href={localizedHref} onClick={() => setLocaleCookie(currentLocale)} className="text-lg leading-relaxed mb-4">
-          <p className="text-lg leading-relaxed mb-4">{excerpt}</p>
+          <div className="text-lg leading-relaxed mb-4">
+          <span dangerouslySetInnerHTML={{__html:excerpt}} />
+          </div>
         </Link>
       </div>
     </div>
