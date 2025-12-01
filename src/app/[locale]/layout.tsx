@@ -14,12 +14,16 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Kyle's Japan Life",
   description: "Blog of my life in Japan",
+  metadataBase: new URL('https://kylesjapan.life'), 
+  alternates: {
+    canonical: 'https://kylesjapan.life',
+  },
   openGraph: {
     title: "Kyle's Japan Life",
     description: "Blog of my life in Japan",
     images: [HOME_OG_IMAGE_URL],
+    url: 'https://kylesjapan.life', 
   },
-  
 };
 
 export const viewport: Viewport = {
@@ -67,6 +71,18 @@ export default async function LocaleLayout({
         <meta name="theme-color" content="#000" />
         <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
         <link rel="icon" href="favicon/favicon.svg" type="image/svg+xml" />
+        <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                "name": "Kyle's Japan Life",
+                "alternateName": "KylesJapan.life",
+                "url": "https://kylesjapan.life"
+              })
+            }}
+            ></script>
       </head>
       <body className={cn(inter.className, "dark:bg-slate-900 dark:text-slate-400")}>
         <NextIntlClientProvider locale={locale} messages={messages}>
