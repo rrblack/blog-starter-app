@@ -8,6 +8,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { setRequestLocale } from "next-intl/server";
 import Footer from "@/app/_components/footer";
+import Script from 'next/script'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -60,6 +61,18 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className="min-h-screen bg-black text-white">
       <head>
+      <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-NBB7WKK8BE"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-NBB7WKK8BE');
+          `}
+        </Script>
         <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
