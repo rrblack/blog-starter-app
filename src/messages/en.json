@@ -37,7 +37,10 @@
     "comment_error":"Failed to send comment. Please try again.",
     "comment_successful":"Comment successfully submitted!",
     "comment_will_display_soon":"Your comment will appear shortly.",
-    "comment_loading_comments":"Error loading comments"
+    "comment_loading_comments":"Error loading comments",
+    "send_reply":"Reply",
+    "reply_to_comment":"Reply",
+    "cancel_reply":"Cancel"
   },
   "More":{
     "more_stories":"More Stories",

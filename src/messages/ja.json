@@ -37,7 +37,10 @@
     "comment_error":"投稿出来ませんでした。もう一度お試しください:",
     "comment_successful":"投稿ありがとうございます！",
     "comment_will_display_soon":"コメントがまもなく表示されます",
-    "comment_loading_comments":"コメントをロード出来ません"
+    "comment_loading_comments":"コメントをロード出来ません",
+    "send_reply":"返事",
+    "reply_to_comment":"返事する",
+    "cancel_reply":"キャンセル"
     },
     "More":{
     "more_stories":"他のストーリー",
