@@ -17,6 +17,7 @@ type Comment = {
   created_at: string;
   slug_id: string;
   parent_id: string;
+  reply?: Comment[];
 };
 
 export default function CommentSection() {
@@ -71,7 +72,38 @@ export default function CommentSection() {
       console.error("Error fetching comments:", error);
       setLoadStatus("error");
     } else {
-      setComments(data);
+      // Organize comments into parent-child structure.
+      const commentMap = new Map<string, Comment>();
+      const topLevelComments: Comment[] = [];
+
+      // Create map of all comments with empty replies array.
+      data.forEach(comment => {
+        commentMap.set(comment.id, {...comment, reply: [] });
+      });
+
+      // Organize into tree structure
+      data.forEach(comment => {
+        const commentWithReplies = commentMap.get(comment.id)!;
+        if (comment.parent_id) {
+          // Add reply
+          const parent = commentMap.get(comment.parent_id);
+          if (parent) {
+            parent.reply!.push(commentWithReplies)
+          }
+        } else {
+          // Top level comment
+          topLevelComments.push(commentWithReplies);
+        }
+      });
+
+      // Sort replies 
+      topLevelComments.forEach(comment => {
+        comment.reply?.sort((a,b) => 
+          new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+      );
+      })
+
+      setComments(topLevelComments);
       setLoadStatus("success");
     }
   }
@@ -123,7 +155,8 @@ export default function CommentSection() {
     try {
       const {error} = await supabase
         .from("comment_section")
-        .insert([{name: replyName,
+        .insert([{
+           name: replyName,
            message: replyMessage, 
            slug_id, 
            parent_id: parentID}]);
@@ -207,21 +240,6 @@ export default function CommentSection() {
               )}
               
             </main>
-            {comment.parent_id && 
-              <div className="max-w-2xl mx-auto my-10 p-5 border rounded border-red-500">
-              <h1 className="text-2xl text-red-600 font-semibold md:h-2">{comment.name}</h1>
-              <h2 className="text-sm text-gray-400 mb-1">
-              {new Date(comment.created_at).toLocaleString()}
-              </h2> 
-              <main className="text-white whitespace-pre-wrap">
-              {loadingCommentId === comment.id ? (
-                <Spinner />
-              ) : (
-                comment.message
-              )}
-              
-            </main>
-            </div>}
             {locale === "ja" && isEnglish(comment.message) && (
               <button
                 className="text-red-500"
@@ -240,14 +258,6 @@ export default function CommentSection() {
                 Translate comment 
               </button>
             )} 
-
-
-
-          {/* WORK IN PROGRESS: Comment Reply Viewer */}
-
-  
-
-          {/* WORK IN PROGRESS: Reply feature */}
           
           <div> 
             <br></br>
@@ -306,13 +316,12 @@ export default function CommentSection() {
                         </div>
                 </form>
                 )}
+                
             </div>
           </div>
         ))}
       </div>
-
-    
-
+      
       {/* Comment Form */}
       <form
         onSubmit={handleSubmit}
