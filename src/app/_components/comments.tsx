@@ -267,7 +267,8 @@ export default function CommentSection() {
             type="button"
             onClick={() => setShowReplyForm(!showReplyForm)}
             > 
-              {t('reply_to_comment')}
+            {/* Will un comment when done*/} 
+              {/* {t('reply_to_comment')} */} 
             </button> )}
             {showReplyForm && (
                 <form onSubmit={(e) => handleReplySubmit(e, comment.id)} >
