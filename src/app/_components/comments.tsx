@@ -259,7 +259,7 @@ export default function CommentSection() {
               </button>
             )} 
           
-          <div> 
+          {/* <div> 
             <br></br>
             {!showReplyForm && (
             <button 
@@ -267,8 +267,8 @@ export default function CommentSection() {
             type="button"
             onClick={() => setShowReplyForm(!showReplyForm)}
             > 
-            {/* Will un comment when done*/} 
-              {/* {t('reply_to_comment')} */} 
+            Will un comment when done 
+              {t('reply_to_comment')} 
             </button> )}
             {showReplyForm && (
                 <form onSubmit={(e) => handleReplySubmit(e, comment.id)} >
@@ -318,7 +318,7 @@ export default function CommentSection() {
                 </form>
                 )}
                 
-            </div>
+            </div> */}
           </div>
         ))}
       </div>
