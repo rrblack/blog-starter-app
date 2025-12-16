@@ -109,33 +109,46 @@ export default function CommentSection() {
   }
 
   async function translateComments(id: string, message: string, locale: string) {
-    setLoadingCommentId(id);
-    let translate_into = locale === "en" ? "EN" : "JA";
+  setLoadingCommentId(id);
+  let translate_into = locale === "en" ? "EN" : "JA";
 
-    try {
-      const res = await fetch("/api/comment-translation", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ id, message, translate_into }),
-      });
+  try {
+    const res = await fetch("/api/comment-translation", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id, message, translate_into }),
+    });
 
-      const data = await res.json();
+    const data = await res.json();
 
-      if (data.translation) {
-        setComments((prev) =>
-          prev.map((c) =>
-            c.id === id ? { ...c, message: data.translation } : c
-          )
-        );
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    } finally {
-      setLoadingCommentId(null);
+    if (data.translation) {
+      setComments((prev) =>
+        prev.map((c) => {
+          // Check if it's the parent comment
+          if (c.id === id) {
+            return { ...c, message: data.translation };
+          }
+          // Check if it's a reply
+          if (c.reply) {
+            return {
+              ...c,
+              reply: c.reply.map(r =>
+                r.id === id ? { ...r, message: data.translation } : r
+              )
+            };
+          }
+          return c;
+        })
+      );
     }
+  } catch (error) {
+    console.error("Error:", error);
+  } finally {
+    setLoadingCommentId(null);
   }
+}
 
   function isEnglish(text: string): boolean {
     const asciiChars = text.split("").filter((char) => char.charCodeAt(0) <= 127);
@@ -206,7 +219,7 @@ export default function CommentSection() {
     }
   };
 
-  return (
+ return (
     <div>
       {/* Comments Viewer */}
       <div id="comments_section">
@@ -223,105 +236,145 @@ export default function CommentSection() {
               : <>
               <span className="text-red-500">{comments.length} </span> {t("multiple_comments")}
               </> 
+             
           )}
         </h1>
-
         {loadStatus === "success" && comments.map((comment) => (
-          <div key={comment.id} className="max-w-2xl mx-auto my-10 p-5 border rounded border-red-500">
-            <h1 className="text-2xl text-red-600 font-semibold">{comment.name}</h1>
-            <h2 className="text-sm text-gray-400 mb-1">
-              {new Date(comment.created_at).toLocaleString()}
-            </h2>
-            <main className="text-white whitespace-pre-wrap">
-              {loadingCommentId === comment.id ? (
-                <Spinner />
-              ) : (
-                comment.message
+          <div key={comment.id}>
+            <div className="max-w-2xl mx-auto my-10 p-5 border rounded border-red-500">
+              <h1 className="text-2xl text-red-600 font-semibold">{comment.name}</h1>
+              <h2 className="text-sm text-gray-400 mb-1">
+                {new Date(comment.created_at).toLocaleString()}
+              </h2>
+              <main className="text-white whitespace-pre-wrap">
+                {loadingCommentId === comment.id ? (
+                  <Spinner />
+                ) : (
+                  comment.message
+                )}
+              </main>
+              {locale === "ja" && isEnglish(comment.message) && (
+                <button
+                  className="text-red-500"
+                  type="button"
+                  onClick={() => translateComments(comment.id, comment.message, locale)}
+                >
+                  コメントを翻訳する
+                </button>
               )}
-              
-            </main>
-            {locale === "ja" && isEnglish(comment.message) && (
-              <button
-                className="text-red-500"
-                type="button"
-                onClick={() => translateComments(comment.id, comment.message, locale)}
-              >
-                コメントを翻訳する
-              </button>
-            )}
-            {locale === "en" && isJapanese(comment.message) && (
-              <button
-                className="text-red-500"
-                type="button"
-                onClick={() => translateComments(comment.id, comment.message, locale)}
-              >
-                Translate comment 
-              </button>
-            )} 
-          
-          <div> 
-            <br></br>
-            {!showReplyForm && (
-            <button 
-            className="text-red-500"
-            type="button"
-            onClick={() => setShowReplyForm(!showReplyForm)}
-            > 
-              {t('reply_to_comment')}
-            </button> )}
-            {showReplyForm && (
-                <form onSubmit={(e) => handleReplySubmit(e, comment.id)} >
-                  <div className="max-w-2xl mx-auto my-10 p-5 border rounded border-red-500 ">
-                    <h1 className="text-red-500 text-2xl"> Replying to {comment.name} </h1> 
-                    <h1 className="text-xl"> {t('name')}: </h1>
-                  <input
-                    className="grow mr-1 transition ease-out delay-75 focus-within:border-2 focus-within:border-red-600 items-center h-14 pr-0.5 border border-red-600 rounded caret-red-700 outline-none px-4 disabled:border-slate-400 disabled:bg-slate-100 text-black"
-                    type="text"
-                    value={replyName}
-                    onChange={(e) => setReplyName(e.target.value)}
-                    required
-                  />
-                  <h1 className="text-xl"> {t('comment_message')}: </h1>
-                    <textarea
-                      className="grow mr-1 transition ease-out delay-75 focus-within:border-2 focus-within:border-red-600 h-40 w-full border border-red-600 rounded caret-red-700 outline-none px-4 disabled:border-slate-400 disabled:bg-slate-100 text-black"
-                      onChange={(e) => setReplyMessage(e.target.value)}
-                      value={replyMessage}
-                      required
-                    />
-                    <div className="flex gap-4">
-                    <button
-                        className="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline h-14 disabled:bg-slate-400"
-                        type="submit"
-                        disabled={submitStatus === "loading"}
-                      >
-                        {submitStatus === "loading" ? "..." : t('send_reply')}
-                      </button>
-                      {submitStatus === "error" && <p className="text-red-500">{t('comment_error')}</p>}
-                      {submitStatus === "success" && (
-                        <p className="text-green-500">
-                          <b>{t('comment_successful')} </b><br />
-                          {t('comment_will_display_soon')}.
-                        </p>
+              {locale === "en" && isJapanese(comment.message) && (
+                <button
+                  className="text-red-500"
+                  type="button"
+                  onClick={() => translateComments(comment.id, comment.message, locale)}
+                >
+                  Translate comment 
+                </button>
+              )}
+
+              {/* Reply feature */}
+              <div> 
+                <br></br>
+                {!showReplyForm && (
+                <button 
+                  className="text-red-500"
+                  type="button"
+                  onClick={() => setShowReplyForm(!showReplyForm)}
+                > 
+                  {t('reply_to_comment')}
+                </button> )}
+                {showReplyForm && (
+                  <form onSubmit={(e) => handleReplySubmit(e, comment.id)} >
+                    <div className="my-4 p-5 border rounded border-red-500">
+                      <h1 className="text-red-500 text-2xl"> Replying to {comment.name} </h1> 
+                      <h1 className="text-xl"> {t('name')}: </h1>
+                      <input
+                        className="grow mr-1 transition ease-out delay-75 focus-within:border-2 focus-within:border-red-600 items-center h-14 pr-0.5 border border-red-600 rounded caret-red-700 outline-none px-4 disabled:border-slate-400 disabled:bg-slate-100 text-black"
+                        type="text"
+                        value={replyName}
+                        onChange={(e) => setReplyName(e.target.value)}
+                        required
+                      />
+                      <h1 className="text-xl"> {t('comment_message')}: </h1>
+                      <textarea
+                        className="w-full transition ease-out delay-75 focus-within:border-2 focus-within:border-red-600 h-40 border border-red-600 rounded caret-red-700 outline-none px-4 py-2 disabled:border-slate-400 disabled:bg-slate-100 text-black"
+                        onChange={(e) => setReplyMessage(e.target.value)}
+                        value={replyMessage}
+                        required
+                      />
+                      <div className="flex gap-4">
+                        <button
+                          className="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline h-14 disabled:bg-slate-400"
+                          type="submit"
+                          disabled={submitStatus === "loading"}
+                        >
+                          {submitStatus === "loading" ? "..." : t('send_reply')}
+                        </button>
+                        {submitStatus === "error" && <p className="text-red-500">{t('comment_error')}</p>}
+                        {submitStatus === "success" && (
+                          <p className="text-green-500">
+                            <b>{t('comment_successful')} </b><br />
+                            {t('comment_will_display_soon')}.
+                          </p>
                         )}
                         <button
-                    className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline h-14 disabled:bg-slate-400"
-                    type="button"
-                    onClick={() => {
-                      setShowReplyForm(false);
-                    }}
-                  >
-                    {t('cancel_reply')}
-                  </button>
-                  </div>
-                        </div>
-                </form>
+                          className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline h-14 disabled:bg-slate-400"
+                          type="button"
+                          onClick={() => {
+                            setShowReplyForm(false);
+                          }}
+                        >
+                          {t('cancel_reply')}
+                        </button>
+                      </div>
+                    </div>
+                  </form>
                 )}
-                
+              </div>
+
+              {/* Render Replies INSIDE parent comment */}
+              {comment.reply && comment.reply.length > 0 && (
+                <div className="mt-6">
+                  {comment.reply.map((reply) => (
+                    <div 
+                      key={reply.id} 
+                      className="ml-4 mt-4 p-4 border-l-4 border-red-500 pl-4 bg-gray-900 rounded"
+                    >
+                      <h1 className="text-xl text-red-600 font-semibold">{reply.name}</h1>
+                      <h2 className="text-sm text-gray-400 mb-1">
+                        {new Date(reply.created_at).toLocaleString()}
+                      </h2>
+                      <main className="text-white whitespace-pre-wrap">
+                        {loadingCommentId === reply.id ? <Spinner /> : reply.message}
+                      </main>
+                      {locale === "ja" && isEnglish(reply.message) && (
+                        <button
+                          className="text-red-500 mt-2"
+                          type="button"
+                          onClick={() => translateComments(reply.id, reply.message, locale)}
+                        >
+                          コメントを翻訳する
+                        </button>
+                      )}
+                      {locale === "en" && isJapanese(reply.message) && (
+                        <button
+                          className="text-red-500 mt-2"
+                          type="button"
+                          onClick={() => translateComments(reply.id, reply.message, locale)}
+                        >
+                          Translate comment 
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+
             </div>
           </div>
         ))}
       </div>
-      
+
       {/* Comment Form */}
       <form
         onSubmit={handleSubmit}
