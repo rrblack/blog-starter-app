@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import Spinner from "./comment_spinner";
 import { useTranslations, useLocale } from "next-intl";
+import { cp } from "fs";
 
 const supabase = createClient();
 const NAME_COOKIE = "COMMENTER_NAME";
@@ -26,6 +27,7 @@ export default function CommentSection() {
   const [message, setMessage] = useState("");
   const [replyName, setReplyName] = useState("");
   const [replyMessage, setReplyMessage] = useState("");
+ 
 
   const [submitStatus, setSubmitStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   
@@ -34,6 +36,7 @@ export default function CommentSection() {
   const [loadStatus, setLoadStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [loadingCommentId, setLoadingCommentId] = useState<string | null>(null);
   const [showReplyForm, setShowReplyForm] = useState<boolean>(false);
+  const [activeReplyID, setActiveReplyID] = useState("");
 
   const params = useParams();
   const slug_id = params.slug as string;
@@ -55,6 +58,7 @@ export default function CommentSection() {
     if (nameCookie) {
       const savedName = decodeURIComponent(nameCookie.split("=")[1]);
       setName(savedName);
+      setReplyName(savedName)
     }
     fetchComments();
   }, []);
@@ -178,8 +182,11 @@ export default function CommentSection() {
           throw error;
         }
         // Clear the form and refresh
+        setSubmitStatus("success")
         setReplyMessage("")
-        setShowReplyForm(false)
+        setActiveReplyID("")
+        setNameCookie(replyName)
+        setTimeout(() => setSubmitStatus("idle"), 3000);
         await fetchComments();
     } catch (error) {
       console.error("Error submitting reply:", error);
@@ -275,15 +282,15 @@ export default function CommentSection() {
               {/* Reply feature */}
               <div> 
                 <br></br>
-                {!showReplyForm && (
+                {activeReplyID !== comment.id && (
                 <button 
                   className="text-red-500"
                   type="button"
-                  onClick={() => setShowReplyForm(!showReplyForm)}
+                  onClick={() => setActiveReplyID(comment.id)}
                 > 
                   {t('reply_to_comment')}
                 </button> )}
-                {showReplyForm && (
+                {activeReplyID === comment.id && (
                   <form onSubmit={(e) => handleReplySubmit(e, comment.id)} >
                     <div className="my-4 p-5 border rounded border-red-500">
                       <h1 className="text-red-500 text-2xl"> Replying to {comment.name} </h1> 
@@ -321,7 +328,7 @@ export default function CommentSection() {
                           className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline h-14 disabled:bg-slate-400"
                           type="button"
                           onClick={() => {
-                            setShowReplyForm(false);
+                            setActiveReplyID("");
                           }}
                         >
                           {t('cancel_reply')}
