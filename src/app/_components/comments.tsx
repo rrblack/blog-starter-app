@@ -340,7 +340,12 @@ export default function CommentSection() {
                       key={reply.id} 
                       className="ml-4 mt-4 p-4 border-l-4 border-red-500 pl-4 bg-gray-900 rounded"
                     >
+                       <div className="flex items-center gap-2"> 
+                      {reply.name === "Kyle" && (
+                        <img className="rounded-full w-8 h-8" src="/assets/blog/authors/kyle.jpg" />
+                      )}
                       <h1 className="text-xl text-red-600 font-semibold">{reply.name}</h1>
+                      </div>
                       <h2 className="text-sm text-gray-400 mb-1">
                         {new Date(reply.created_at).toLocaleString()}
                       </h2>
