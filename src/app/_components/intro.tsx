@@ -65,7 +65,8 @@ export function Intro() {
     </div>
         </section>
 
-        <div className="mt-90 mb-32 md:mb-32 text-center"></div>
+        {/* Use this area for when you want to add banner below Kyle's Japan Life //}
+        {/* <div className="mt-90 mb-32 md:mb-32 text-center"></div> */}
       </div>
     </>
   );
