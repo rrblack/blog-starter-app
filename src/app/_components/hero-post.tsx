@@ -65,12 +65,12 @@ export function HeroPost({
         <div className="flex flex-col justify-center"> 
           <h3 className={`font-bold mb-4 leading-tight ${ 
             locale === "en"
-              ? excerpt.length < 600
-                ? "text-4xl lg:text-6xl"
-                : "text-4xl lg:text-7xl"
-              : excerpt.length < 250
-                ? "text-4xl lg:text-6xl"
-                : "text-4xl lg:text-7xl"
+              ? excerpt.length > 600
+                ? "text-4xl lg:text-7xl"
+                : "text-4xl lg:text-6xl"
+              : excerpt.length > 250
+                ? "text-4xl lg:text-7xl"
+                : "text-4xl lg:text-6xl"
         }`}> 
             <Link
               href={localizedPostHref}

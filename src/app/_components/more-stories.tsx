@@ -16,7 +16,7 @@ export function MoreStories({ posts }: Props) {
   const t = useTranslations("More");
 
   const showMore = () => {
-    setVisibleCount((prev) => prev + 3); // reveal 3 more each click
+    setVisibleCount((prev) => prev + 2); // reveal 3 more each click
     setClickedButton(true)
   };
 
@@ -38,11 +38,6 @@ export function MoreStories({ posts }: Props) {
           />
         ))}
       </div>
-        <div className="flex-auto md:py-12 py-12">
-          {buttonClicked===true && (
-          <ArchiveNavigation/>
-        )}
-        </div>
       {visibleCount < posts.length && (
         <div className="flex justify-center">
           <button
@@ -53,6 +48,11 @@ export function MoreStories({ posts }: Props) {
           </button>
         </div>
       )}
+      <div className="flex-auto md:py-12 py-12">
+          {buttonClicked===true && (
+          <ArchiveNavigation/>
+        )}
+        </div>
     </section>
   );
 }
