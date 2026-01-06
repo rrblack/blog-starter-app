@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Post } from "@/interfaces/post";
 import { PostPreview } from "./post-preview";
 import { useTranslations } from "next-intl";
+import { ArchiveNavigation } from "./archive-navigation";
 
 
 type Props = {
@@ -10,11 +11,13 @@ type Props = {
 };
 
 export function MoreStories({ posts }: Props) {
-  const [visibleCount, setVisibleCount] = useState(2); // show 3 initially
+  const [visibleCount, setVisibleCount] = useState(2); // show 2 initially
+  const [buttonClicked, setClickedButton] = useState(false) 
   const t = useTranslations("More");
 
   const showMore = () => {
     setVisibleCount((prev) => prev + 3); // reveal 3 more each click
+    setClickedButton(true)
   };
 
   return (
@@ -35,7 +38,11 @@ export function MoreStories({ posts }: Props) {
           />
         ))}
       </div>
-
+        <div className="flex-auto md:py-12 py-12">
+          {buttonClicked===true && (
+          <ArchiveNavigation/>
+        )}
+        </div>
       {visibleCount < posts.length && (
         <div className="flex justify-center">
           <button
