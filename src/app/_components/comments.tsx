@@ -231,20 +231,68 @@ export default function CommentSection() {
 
  return (
     <div>
+      {/* Comment Form */}
+      <div className="text-center font-bold text-5xl">
+      {loadStatus === "success" && (
+            comments.length === 0
+              ? t("first") : ""
+      )}
+      </div>
+      <form
+        onSubmit={handleSubmit}
+        className="rounded px-8 pt-6 pb-8 mb-4 max-w-2xl center mx-auto"
+      >
+        <h2 className="text-center md:text-4xl text-2xl text-red-500 font-semibold">
+          {t('leave_comment')}
+        </h2>
+        <div>
+          <h1 className="text-xl"> {t('name')}: </h1>
+          <input
+            className="grow mr-1 transition ease-out delay-75 focus-within:border-2 focus-within:border-red-600 items-center h-14 pr-0.5 border border-red-600 rounded caret-red-700 outline-none px-4 disabled:border-slate-400 disabled:bg-slate-100 text-black"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+          <h1 className="text-xl"> {t('comment_message')}: </h1>
+          <textarea
+            className="grow mr-1 transition ease-out delay-75 focus-within:border-2 focus-within:border-red-600 h-40 w-full border border-red-600 rounded caret-red-700 outline-none px-4 disabled:border-slate-400 disabled:bg-slate-100 text-black"
+            onChange={(e) => setMessage(e.target.value)}
+            value={message}
+            required
+          />
+          <button
+            className="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline h-14 disabled:bg-slate-400"
+            type="submit"
+            disabled={submitStatus === "loading"}
+          >
+            {submitStatus === "loading" ? "..." : t('submit')}
+          </button>
+          {submitStatus === "error" && <p className="text-red-500">{t('comment_error')}</p>}
+          {submitStatus === "success" && (
+            <p className="text-green-500">
+              <b>{t('comment_successful')} </b><br />
+              {t('comment_will_display_soon')}.
+            </p>
+          )}
+        </div>
+      </form>
       {/* Comments Viewer */}
       <div id="comments_section">
         <h1 className="text-center font-bold text-5xl">
           {loadStatus === "loading" && <Spinner />}
           {loadStatus === "error" && t("comment_loading_comments")}
           {loadStatus === "success" && (
-            comments.length === 0
-              ? t("first")
-              : comments.length === 1
-              ? <>
-                <span className="text-red-500">1</span> {t("one_comment")}
+              comments.length === 1 ? (
+                <>
+                  <span className="text-red-500">1</span> {t("one_comment")}
                 </>
-              : <>
-              <span className="text-red-500">{comments.length} </span> {t("multiple_comments")}
+              ): comments.length === 0 ? (
+                <>
+                </>
+              ):
+              <>
+                <span className="text-red-500">{comments.length} </span> {t("multiple_comments")}
               </> 
           )}
         </h1>
@@ -400,47 +448,6 @@ export default function CommentSection() {
           </div>
         ))}
       </div>
-
-      {/* Comment Form */}
-      <form
-        onSubmit={handleSubmit}
-        className="rounded px-8 pt-6 pb-8 mb-4 max-w-2xl center mx-auto"
-      >
-        <h2 className="text-center text-2xl text-red-500 font-semibold">
-          {t('leave_comment')}
-        </h2>
-        <div>
-          <h1 className="text-xl"> {t('name')}: </h1>
-          <input
-            className="grow mr-1 transition ease-out delay-75 focus-within:border-2 focus-within:border-red-600 items-center h-14 pr-0.5 border border-red-600 rounded caret-red-700 outline-none px-4 disabled:border-slate-400 disabled:bg-slate-100 text-black"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-          <h1 className="text-xl"> {t('comment_message')}: </h1>
-          <textarea
-            className="grow mr-1 transition ease-out delay-75 focus-within:border-2 focus-within:border-red-600 h-40 w-full border border-red-600 rounded caret-red-700 outline-none px-4 disabled:border-slate-400 disabled:bg-slate-100 text-black"
-            onChange={(e) => setMessage(e.target.value)}
-            value={message}
-            required
-          />
-          <button
-            className="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline h-14 disabled:bg-slate-400"
-            type="submit"
-            disabled={submitStatus === "loading"}
-          >
-            {submitStatus === "loading" ? "..." : t('submit')}
-          </button>
-          {submitStatus === "error" && <p className="text-red-500">{t('comment_error')}</p>}
-          {submitStatus === "success" && (
-            <p className="text-green-500">
-              <b>{t('comment_successful')} </b><br />
-              {t('comment_will_display_soon')}.
-            </p>
-          )}
-        </div>
-      </form>
     </div>
   );
 }
