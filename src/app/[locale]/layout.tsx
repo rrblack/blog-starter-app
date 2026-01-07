@@ -9,6 +9,7 @@ import { routing } from "@/i18n/routing";
 import { setRequestLocale } from "next-intl/server";
 import Footer from "@/app/_components/footer";
 import Script from 'next/script'
+import AOSProvider from "../_components/aos-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -99,7 +100,9 @@ export default async function LocaleLayout({
       </head>
       <body className={cn(inter.className, "dark:bg-slate-900 dark:text-slate-400")}>
         <NextIntlClientProvider locale={locale} messages={messages}>
+          <AOSProvider>
           <div className="min-h-screen">{children}</div>
+           </AOSProvider>
           <Footer />
         </NextIntlClientProvider>
       </body>

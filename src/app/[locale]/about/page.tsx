@@ -21,10 +21,10 @@ export default function AboutPage() {
           <Header />
         </Suspense>
         <div className="md:mt-36 mt-2">
-          <h1 className="md:-mt-20 text-center text-4xl break-keep break-words whitespace-normal md:text-7xl mb-12">
+          <h1 data-aos="fade-up" className="md:-mt-20 text-center text-4xl break-keep break-words whitespace-normal md:text-7xl mb-12">
             {t("header")}
           </h1>
-          <div className="md:mt-20 justify-center">
+          <div data-aos="fade-up" className="md:mt-20 justify-center">
             <Image
               src="/assets/blog/authors/Img_2025_02_16_00_19_00.jpeg"
               alt="著者の写真"
@@ -42,16 +42,13 @@ export default function AboutPage() {
               </div>
             )}
           </div>
-          <p className="flex items-center md:text-center md:text-xl md:text-wrap mt-10 md:mt-10 mx-5 md:mx-60 mb-10 md:mb-15">
-            {t("p1")}
-            <br />
-            <br />
-            {t("p2")}
-            <br />
-            <br />
-            {t("p3")}
-            <br />
-          </p>
+          <div className="flex flex-col items-center md:text-center md:text-xl mt-10 mx-5 md:mx-60 mb-10 md:text-wrap">
+            <p data-aos="fade-up">{t("p1")}</p>
+            <br></br>
+            <p data-aos="fade-up">{t("p2")}</p>
+            <br></br>
+            <p data-aos="fade-up">{t("p3")}</p>
+          </div>
         </div>
       </Container>
     </main>

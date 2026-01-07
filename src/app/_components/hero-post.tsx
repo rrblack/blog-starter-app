@@ -53,7 +53,7 @@ export function HeroPost({
   const locale = useLocale();
 
   return (
-    <section>
+    <section data-aos="fade-up">
       <div className="mb-8 md:mb-16">
         <Link href={localizedPostHref} onClick={() => setLocaleCookie(currentLocale)} aria-label={title}>
           {/* CoverImage no longer renders its own Link; pass only title and src */}
