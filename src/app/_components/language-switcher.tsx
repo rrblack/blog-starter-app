@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useSearchParams, useRouter, useParams } from "next/navigation";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 
 const LOCALES = ["en", "ja"];
 const COOKIE_NAME = "USER_LOCALE";
@@ -38,6 +38,12 @@ export default function LanguageSwitcher() {
     setLocaleCookie(locale);
     router.push(newPathname + search);
   }, [pathname, router, search]);
+
+  useEffect(() => {
+  if (typeof window !== "undefined" && (window as any).AOS) {
+    (window as any).AOS.init();
+  }
+    }, [setLocaleCookie]);
 
   return (
     <button

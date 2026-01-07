@@ -1,8 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Post } from "@/interfaces/post";
 import { PostPreview } from "./post-preview";
 import { useTranslations } from "next-intl";
+import { ArchiveNavigation } from "./archive-navigation";
+
 
 
 type Props = {
@@ -10,21 +12,30 @@ type Props = {
 };
 
 export function MoreStories({ posts }: Props) {
-  const [visibleCount, setVisibleCount] = useState(2); // show 3 initially
+  const [visibleCount, setVisibleCount] = useState(2); // show 2 initially
+  const [buttonClicked, setClickedButton] = useState(false)
   const t = useTranslations("More");
 
   const showMore = () => {
-    setVisibleCount((prev) => prev + 3); // reveal 3 more each click
+    setVisibleCount((prev) => prev + 2); // reveal 2 more each click
+    setClickedButton(true)
   };
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && (window as any).AOS) {
+      (window as any).AOS.refresh();
+    }
+  }, [visibleCount]);
 
   return (
     <section>
-      <h2 className="mb-8 text-5xl -mt-8 md:text-7xl font-bold tracking-tighter leading-tight text-red-500">
+      <h2 data-aos="fade-up" className="mb-8 text-5xl -mt-8 md:text-7xl font-bold tracking-tighter leading-tight text-red-500">
         {t("more_stories")}
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-16 lg:gap-x-22 gap-y-12 md:gap-y-12 mb-12">
         {posts.slice(0, visibleCount).map((post) => (
+          <div data-aos="fade-up"> 
           <PostPreview
             key={post.slug}
             title={post.title}
@@ -33,9 +44,9 @@ export function MoreStories({ posts }: Props) {
             slug={post.slug}
             excerpt={post.excerpt}
           />
+          </div>
         ))}
       </div>
-
       {visibleCount < posts.length && (
         <div className="flex justify-center">
           <button
@@ -46,6 +57,11 @@ export function MoreStories({ posts }: Props) {
           </button>
         </div>
       )}
+      <div className="flex-auto md:py-12 py-12">
+          {buttonClicked===true && (
+          <ArchiveNavigation/>
+        )}
+        </div>
     </section>
   );
 }

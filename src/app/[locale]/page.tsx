@@ -18,7 +18,6 @@ export default async function Index({ params }: { params: Promise <{ locale: str
         <Suspense fallback={null}>
         <Intro /> 
         </Suspense>
-        <ArchiveNavigation />
         <HeroPost {...heroPost} />
         {morePosts.length > 0 && <MoreStories posts={morePosts} />}
         <div className="mt-16" />

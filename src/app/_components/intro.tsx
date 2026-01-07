@@ -48,24 +48,25 @@ export function Intro() {
           {/* Subtitle + About me */}
           <div className="flex flex-col items-center md:items-end md:flex-1 md:text-right">
         {currentLocale === "ja" ? (
-          <h4 className="text-center md:text-right font-semibold text-2xl mt-5 md:pl-8 text-red-500">
+          <h4 className="text-center md:text-right font-semibold text-2xl md:text-3xl mt-5 md:pl-8 text-red-500">
             {country}<span className="text-white">{subtitle}</span>
           </h4>
         ) : (
-          <h4 className="text-center md:text-right font-semibold text-2xl mt-5 md:pl-8 text-white">
+          <h4 className="text-center md:text-right font-semibold text-2xl md:text-3xl mt-5 md:pl-8 text-white">
             {subtitle} <span className="text-red-500">{country}</span>
           </h4>
         )}
         <Link
           href={localizedPostHref}
-          className="text-xl text-white font-bold hover:text-red-500 mt-2 md:mt-3 hover:scale-110 transform transition-transform shadow-red-500/70"
+          className="text-xl md:text-2xl text-white font-bold hover:text-red-500 mt-2 md:mt-3 hover:scale-110 transform transition-transform shadow-red-500/70"
         >
           {t("about_me")}
         </Link>
     </div>
         </section>
 
-        <div className="mt-90 mb-32 md:mb-32 text-center"></div>
+        {/* Use this area for when you want to add banner below Kyle's Japan Life //}
+        {/* <div className="mt-90 mb-32 md:mb-32 text-center"></div> */}
       </div>
     </>
   );

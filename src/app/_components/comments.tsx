@@ -34,7 +34,6 @@ export default function CommentSection() {
   const [comments, setComments] = useState<Comment[]>([]);
   const [loadStatus, setLoadStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [loadingCommentId, setLoadingCommentId] = useState<string | null>(null);
-  const [showReplyForm, setShowReplyForm] = useState<boolean>(false);
   const [activeReplyID, setActiveReplyID] = useState("");
 
   //Translation holder

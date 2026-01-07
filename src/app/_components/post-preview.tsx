@@ -52,7 +52,7 @@ export function PostPreview({
           <CoverImage title={title} src={coverImage} onClick={() => { /* optional extra */ }} />
         </Link>
       </div>
-      <h3 className="text-3xl mb-3 leading-snug font-semibold">
+      <h3 className="text-3xl md:text-4xl mb-3 leading-snug font-semibold">
         <Link
           href={localizedHref}
           onClick={() => setLocaleCookie(currentLocale)}

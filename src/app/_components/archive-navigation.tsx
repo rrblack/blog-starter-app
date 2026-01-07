@@ -6,7 +6,7 @@ export function ArchiveNavigation() {
   const t = useTranslations("Navigation")
   
   return (
-    <div className="md:mb-16 -mt-24 md:-mt-8"> 
+    <div className="md:mb-16"> {/* If you ever want to move archive back to top page insert this at end: -mt-24 md:-mt-8*/}
     <h1 className ="text-center mb-8 text-white break-keep break-words whitespace-normal font-bold text-4xl"> 
       {t('past_blogs')} 
       </h1>
