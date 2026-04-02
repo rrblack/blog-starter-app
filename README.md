@@ -141,6 +141,10 @@ Topics covered:
 
 The blog has an active newsletter. Subscribe at [kylesjapan.life](https://kylesjapan.life) to get updates directly in your inbox.
 
+## 📄 License
+
+All rights reserved. This repository is public for portfolio purposes only. 
+Please do not copy, reuse, or redistribute any part of this codebase without permission.
 ---
 
 ---
@@ -293,11 +297,6 @@ npm run build
 ## 📄 ライセンス
 
 全著作権所有。このリポジトリはポートフォリオ目的で公開しています。許可なくコードの複製、再利用、再配布はご遠慮ください。
-
-## 📄 License
-
-All rights reserved. This repository is public for portfolio purposes only. 
-Please do not copy, reuse, or redistribute any part of this codebase without permission.
 
 ---
 
