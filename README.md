@@ -143,6 +143,157 @@ The blog has an active newsletter. Subscribe at [kylesjapan.life](https://kylesj
 
 ---
 
+---
+
+# Kyle's Japan Life 🇯🇵（日本語版）
+
+日本での生活、旅行、語学学習をテーマにしたバイリンガル個人ブログです。WordPressからの脱却を機に、フルスタックの個人プロジェクトとしてゼロから構築しました。ホスティングコストをかけずに完全自己管理できる仕組みを目指して設計しています。
+
+🌐 **サイト:** [kylesjapan.life](https://kylesjapan.life)
+
+---
+
+## ✨ 機能一覧
+
+- 🌍 **バイリンガル対応** — 日英完全対応コンテンツ。DeepL API による翻訳機能を統合
+- 📝 **MDXベースの記事管理** — Markdownで記事を書きながらReactコンポーネントも埋め込み可能
+- 💬 **ネスト型コメント・返信システム** — Supabaseをベースにしたスレッド機能付きコメント
+- 🏷️ **タグフィルタリング** — カテゴリ・タグで記事を絞り込み
+- ⏱️ **読了時間の自動計算** — 記事ごとに読了時間を自動表示
+- 🖼️ **画像ライトボックス** — yet-another-react-lightbox によるスムーズな画像表示
+- 🚀 **画像最適化** — Next.js Image コンポーネントによる高速ロード
+- 📧 **ニュースレター** — メール購読機能。定期的に読者へ配信
+- ☁️ **ゼロコストホスティング** — Cloudflare Pages でデプロイ。月額費用なし
+
+---
+
+## 🛠️ 技術スタック
+
+| レイヤー | 技術 |
+|---|---|
+| フレームワーク | Next.js 14 (App Router) |
+| 言語 | TypeScript |
+| データベース | Supabase (PostgreSQL) |
+| コンテンツ | MDX |
+| スタイリング | Tailwind CSS |
+| デプロイ | Cloudflare Pages |
+| 翻訳 | DeepL API |
+| 画像ライトボックス | yet-another-react-lightbox |
+
+---
+
+## 🚀 ローカル環境での起動
+
+### 必要環境
+
+- Node.js 18以上
+- Supabaseアカウント
+- Cloudflareアカウント
+- DeepL APIキー（無料プランで動作）
+
+### インストール
+
+```bash
+git clone https://github.com/yourusername/kylesjapan.life.git
+cd kylesjapan.life
+npm install
+```
+
+### 環境変数
+
+ルートディレクトリに `.env.local` ファイルを作成してください。
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+DEEPL_API_KEY=your_deepl_api_key
+```
+
+### 開発サーバー起動
+
+```bash
+npm run dev
+```
+
+ブラウザで [http://localhost:3000](http://localhost:3000) を開いてください。
+
+---
+
+## 📁 プロジェクト構成
+
+```
+├── app/                  # Next.js App Router ページ
+│   ├── [lang]/           # バイリンガルルーティング (en/ja)
+│   ├── blog/             # ブログ記事ページ
+│   └── api/              # APIルート
+├── components/           # 再利用可能なReactコンポーネント
+│   ├── comments/         # ネスト型コメントシステム
+│   ├── lightbox/         # 画像ライトボックス
+│   └── newsletter/       # ニュースレター登録
+├── content/              # MDXブログ記事
+│   ├── en/               # 英語記事
+│   └── ja/               # 日本語記事
+├── lib/                  # ユーティリティ関数
+│   ├── supabase.ts       # Supabaseクライアント
+│   └── mdx.ts            # MDX処理
+└── public/               # 静的アセット
+```
+
+---
+
+## 🗄️ データベーススキーマ (Supabase)
+
+### コメントテーブル
+
+```sql
+create table comments (
+  id uuid default gen_random_uuid() primary key,
+  post_slug text not null,
+  author_name text not null,
+  content text not null,
+  parent_id uuid references comments(id),
+  created_at timestamp with time zone default now()
+);
+```
+
+---
+
+## 🌐 デプロイ
+
+**Cloudflare Pages** にデプロイしており、月額費用はゼロです。
+
+```bash
+npm run build
+```
+
+`main` ブランチへのプッシュで Cloudflare Pages が自動デプロイします。
+
+---
+
+## 📖 プロジェクトについて
+
+このブログは2022年に日本へ移住した際、WordPressでスタートしました。その後IT業界に転職し、独学でWeb開発を学ぶ中で、全てをゼロから作り直しました。設計からデプロイまで全て自分一人で担当しています。
+
+目標はシンプルでした。完全な自己管理、ランニングコストゼロ、そして本番環境で動く本物のプロジェクトを持つこと。
+
+扱っているテーマ:
+- 🗾 アメリカ人として見る日本での生活
+- 🗣️ 日本語学習の記録（JLPT N1取得まで）
+- ✈️ 日本国内・アジアへの旅行
+- 🏯 日本文化と日常生活
+
+---
+
+## 📬 ニュースレター
+
+ブログではニュースレターを定期配信しています。[kylesjapan.life](https://kylesjapan.life) から購読できます。
+
+---
+
+## 📄 ライセンス
+
+全著作権所有。このリポジトリはポートフォリオ目的で公開しています。許可なくコードの複製、再利用、再配布はご遠慮ください。
+
 ## 📄 License
 
 All rights reserved. This repository is public for portfolio purposes only. 
